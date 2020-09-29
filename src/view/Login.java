@@ -1,9 +1,12 @@
 package view;
 
 import javax.swing.JPanel;
+
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.TextField;
+
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.border.MatteBorder;
@@ -14,6 +17,14 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import controller.ControllerContribuinte;
+import persistance.MapeadorContribuinte;
+import persistance.MapeadorFuncionario;
+import model.Contribuinte;
+import model.Funcionario;
 
 public class Login extends JPanel {
 	private JTextField textField;
@@ -65,6 +76,13 @@ public class Login extends JPanel {
 		add(lblNewLabel_3);
 		
 		JButton btnNewButton = new JButton("Logar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(ControllerContribuinte.getInstancia().getContribuinteByLogin(textField.getText()) =! null) {
+					
+				}
+			}
+		});
 		btnNewButton.setBounds(79, 205, 89, 23);
 		add(btnNewButton);
 
