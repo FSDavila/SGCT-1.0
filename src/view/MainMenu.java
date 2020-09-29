@@ -3,6 +3,8 @@ package view;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -32,7 +34,7 @@ public class MainMenu extends JPanel {
 		JButton btnNewButton = new JButton("Sair do Sistema");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0); //sair do sistema
+				//System.exit(0); //sair do sistema
 			}
 		});
 		btnNewButton.setBounds(31, 247, 161, 23);
@@ -42,6 +44,16 @@ public class MainMenu extends JPanel {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel.setBounds(69, 11, 93, 14);
 		add(lblNewLabel);
+		
+		JButton btnNewButton_1 = new JButton("Tela Prototipo Cad.");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaCadContribuinte telaPrototype = new TelaCadContribuinte();
+				telaPrototype.setVisible(true);
+			}
+		});
+		btnNewButton_1.setBounds(31, 145, 161, 23);
+		add(btnNewButton_1);
 
 	}
 }

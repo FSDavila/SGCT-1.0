@@ -4,6 +4,8 @@ import javax.swing.JPanel;
 
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.TextField;
 
@@ -15,6 +17,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
@@ -78,8 +81,19 @@ public class Login extends JPanel {
 		JButton btnNewButton = new JButton("Logar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(ControllerContribuinte.getInstancia().getContribuinteByLogin(textField.getText()) =! null) {
-					
+				Contribuinte procurado = ControllerContribuinte.getInstancia().getContribuinteByLogin(textField.getText());
+				if(procurado != null && procurado.getSenha() == passwordField.toString()) {
+					JOptionPane.showMessageDialog(null, "Logado com sucesso!.", "Aviso", JOptionPane.WARNING_MESSAGE);
+					MainMenu menuPrincipal = new MainMenu();
+					setVisible(false);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Verifique os dados digitados e tente novamente.", "Aviso", JOptionPane.WARNING_MESSAGE);
+					JFrame frame = new JFrame();
+					MainMenu menuPrincipal = new MainMenu();
+			    	frame.add(menuPrincipal);
+			    	frame.setSize(300, 300);
+			    	frame.setVisible(true);
 				}
 			}
 		});
