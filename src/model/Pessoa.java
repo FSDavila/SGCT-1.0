@@ -3,14 +3,15 @@ package model;
 import java.util.Date;
 
 public abstract class Pessoa {
+
 	private String nome;
-	private Date DNF; //data de nascimento ou data de fundacao
-	
+	private Date DNF; // data de nascimento ou data de fundacao
+
 	public Pessoa(String nome, Date DNF) {
 		this.nome = nome;
 		this.DNF = DNF;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -28,6 +29,6 @@ public abstract class Pessoa {
 	}
 
 	public Pessoa() {
-		
+
 	}
 }
