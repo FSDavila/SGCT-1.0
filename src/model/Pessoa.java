@@ -15,6 +15,10 @@ public abstract class Pessoa {
 		this.senha = senha;
 	}
 	
+	public Pessoa() {
+		
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -30,8 +34,20 @@ public abstract class Pessoa {
 	public void setDNF(Date dNF) {
 		DNF = dNF;
 	}
+	
+	public String getLogin() {
+		return login;
+	}
 
-	public Pessoa() {
-		
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 }
