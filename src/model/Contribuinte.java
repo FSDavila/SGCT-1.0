@@ -16,7 +16,7 @@ public class Contribuinte extends Pessoa{
 	
 	public Contribuinte(String nome, Date DNF, int identificacao, String login, String senha, String email, Date dtCadastroChat,
 			boolean ehCNPJ) {
-		super(nome, DNF);
+		super(nome, DNF, login, senha);
 		this.identificacao = identificacao;
 		this.login = login;
 		this.senha = senha;
@@ -31,22 +31,6 @@ public class Contribuinte extends Pessoa{
 
 	public void setIdentificacao(int identificacao) {
 		this.identificacao = identificacao;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 
 	public String getEmail() {
