@@ -1,0 +1,71 @@
+package model;
+
+import java.util.Date;
+
+public class CDA {
+	
+	private Integer nCDA;
+	private double valor;
+	private Imposto tipoImposto;
+	private Date dataVencimento;
+	private String descricao;
+	private Contribuinte titular;
+	private SITUACAO situacaoCDA;
+	
+	public CDA(int nCDA, double valor, Imposto tipoImposto, Date dataVencimento, String descricao,
+			Contribuinte titular, SITUACAO situacaoCDA) {
+		super();
+		this.nCDA = nCDA;
+		this.valor = valor;
+		this.tipoImposto = tipoImposto;
+		this.dataVencimento = dataVencimento;
+		this.descricao = descricao;
+		this.titular = titular;
+		this.situacaoCDA = situacaoCDA;
+	}
+	
+	public int getNCDA() {
+		return nCDA;
+	}
+	public void setNCDA(int nCDA) {
+		this.nCDA = nCDA;
+	}
+	public double getValor() {
+		return valor;
+	}
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
+	public Imposto getTipoImposto() {
+		return tipoImposto;
+	}
+	public void setTipoImposto(Imposto tipoImposto) {
+		this.tipoImposto = tipoImposto;
+	}
+	public Date getDataVencimento() {
+		return dataVencimento;
+	}
+	public void setDataVencimento(Date dataVencimento) {
+		this.dataVencimento = dataVencimento;
+	}
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	public Contribuinte getTitular() {
+		return titular;
+	}
+	public void setTitular(Contribuinte titular) {
+		this.titular = titular;
+	}
+	public SITUACAO getSituacaoCDA() {
+		return situacaoCDA;
+	}
+	public void setSituacaoCDA(int situacao) {
+		this.situacaoCDA = situacao;
+	}
+	
+	
+}
