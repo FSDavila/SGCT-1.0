@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import model.CDA;
+import model.Contribuinte;
 
 public class MapeadorCDA {
 	
@@ -31,8 +32,8 @@ public class MapeadorCDA {
         return instancia;
     }
 
-    public void put(CDA cda) {
-        cacheCDA.put(cda.getNCDA(), cda);
+    public void put(CDA nova) {
+        cacheCDA.put(nova.getNCDA(), nova);
     
     }        
 

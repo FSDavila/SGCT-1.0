@@ -32,25 +32,10 @@ public class ControllerCDA {
     }
 
     public CDA getCDAByNCDA(int nCDA) {
-        CDA procurado = null;
-        boolean encontrado = false;
-        if (nCDA > 0) {
-            for (CDA registro : MapeadorCDA.getInstancia().getList()) {
-            	CDA atual = registro;
-
-                if (atual.getNCDA() == nCDA) {
-                    procurado = atual;
-                    encontrado = true;
-                }
-                if (encontrado) {
-                    return procurado;
-                } else {
-                    return null;
-                }
-
-            }
-        }
-        return null;
+    	if (MapeadorCDA.getInstancia().get(nCDA) != null) {
+    		return MapeadorCDA.getInstancia().get(nCDA);
+    	}
+    	return null;
     }
 
     public boolean ehInt(String s) {

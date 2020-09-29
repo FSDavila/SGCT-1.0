@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class CDA {
@@ -11,6 +12,7 @@ public class CDA {
 	private String descricao;
 	private Contribuinte titular;
 	private SITUACAO situacaoCDA;
+	private ArrayList<CDA> dividas = new ArrayList<>();
 	
 	public CDA(int nCDA, double valor, Imposto tipoImposto, Date dataVencimento, String descricao,
 			Contribuinte titular, SITUACAO situacaoCDA) {
@@ -79,6 +81,14 @@ public class CDA {
 				break;		
 		}
 
+	}
+
+	public ArrayList<CDA> getDividas() {
+		return dividas;
+	}
+
+	public void setDividas(ArrayList<CDA> dividas) {
+		this.dividas = dividas;
 	}
 	
 	

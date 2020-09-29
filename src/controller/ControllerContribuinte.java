@@ -1,15 +1,14 @@
 package controller;
 
 import persistance.MapeadorCDA;
+import persistance.MapeadorContribuinte;
 import model.CDA;
 import model.Contribuinte;
-import model.Funcionario;
 import model.Imposto;
 import model.SITUACAO;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
 
 public class ControllerContribuinte {
 
@@ -25,58 +24,38 @@ public class ControllerContribuinte {
         return instancia;
     }
 
-    public CDA getCDAByNCDA(int nCDA) {
-        CDA procurado = null;
-        boolean encontrado = false;
-        if (nCDA > 0) {
-            for (CDA registro : MapeadorCDA.getInstancia().getList()) {
-            	CDA atual = registro;
-
-                if (atual.getNCDA() == nCDA) {
-                    procurado = atual;
-                    encontrado = true;
-                }
-                if (encontrado) {
-                    return procurado;
-                } else {
-                    return null;
-                }
-
-            }
-        }
-        return null;
+    public Contribuinte getContribuinteById(int id) {
+    	if (MapeadorContribuinte.getInstancia().get(id) != null) {
+    		return MapeadorContribuinte.getInstancia().get(id);
+    	}
+    	return null;
     }
 
-    public boolean ehInt(String s) {
-        try {
-            Integer.parseInt(s);
-        } catch (NumberFormatException e) {
-            return false;
-        } catch (NullPointerException e) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public int cadastraCDA(int nCDA, double valor, Imposto tipoImposto, Date dataVencimento, String descricao,
-			Contribuinte titular, SITUACAO situacaoCDA) {
-            CDA nova = new CDA(nCDA, valor, tipoImposto, dataVencimento, descricao, titular, situacaoCDA);
-            MapeadorCDA.getInstancia().put(nova);
+    public int cadastraContribuinte(String nome, Date DNF, int identificacao, String login, String senha, String email, Date dtCadastroChat,
+			boolean ehCNPJ) {
+            Contribuinte novo = new Contribuinte(nome, DNF, identificacao, login, senha, email, dtCadastroChat, ehCNPJ);
+            MapeadorContribuinte.getInstancia().put(novo);
             return 1;
     }
 
-    public void excluiCDA(int nCDA) { //existe apenas para corrigir dados de forma interna, se necessario
-        MapeadorCDA.getInstancia().remove(nCDA);
+    public void excluiContribuinte(int identificacao) { //existe apenas para corrigir dados de forma interna, se necessario
+    	MapeadorContribuinte.getInstancia().remove(identificacao);
+    }
+    
+    public void alteraDados(int identificacao, String nome, Date DNF, String login, String senha, String email, Date dtCadastroChat,
+			boolean ehCNPJ) { 
+    	Contribuinte alterar = MapeadorContribuinte.getInstancia().get(identificacao);
+    	alterar.setDNF(DNF);
+    	alterar.setNome(nome);
+    	alterar.setLogin(login);
+    	alterar.setSenha(senha);
+    	alterar.setEmail(email);
+    	alterar.setDtCadastroChat(dtCadastroChat);
+    	alterar.setEhCNPJ(ehCNPJ);
     }
 
-    public void alteraSituacao(int nCDA, int situacao) {
-    	CDA procurada = getCDAByNCDA(nCDA);
-        procurada.setSituacaoCDA(situacao);
-    }
-
-    public ArrayList<CDA> listaFuncionarios() {
-        return MapeadorCDA.getInstancia().getList();
+    public ArrayList<Contribuinte> listaContribuintes() {
+        return MapeadorContribuinte.getInstancia().getList();
     }
 
 }
