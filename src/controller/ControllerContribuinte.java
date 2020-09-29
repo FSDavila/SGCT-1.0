@@ -30,6 +30,15 @@ public class ControllerContribuinte {
     	}
     	return null;
     }
+    
+    public Contribuinte getContribuinteByLogin(String login) {
+		for(Contribuinte contribuinte : MapeadorContribuinte.getInstancia().getList()) {
+			if(contribuinte.getLogin() == login) {
+				return contribuinte;
+			}
+		}
+		return null;
+    }
 
     public int cadastraContribuinte(String nome, Date DNF, int identificacao, String login, String senha, String email, Date dtCadastroChat,
 			boolean ehCNPJ) {
