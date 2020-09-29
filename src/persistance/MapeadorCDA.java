@@ -32,7 +32,7 @@ public class MapeadorCDA {
     }
 
     public void put(CDA cda) {
-        cacheCDA.put(cda.getIdentificacao(), cda);
+        cacheCDA.put(cda.getNCDA(), cda);
     
     }        
 

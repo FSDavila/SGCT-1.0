@@ -11,22 +11,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
-public class ControllerCDA {
+public class ControllerContribuinte {
 
-    private static ControllerCDA instancia; //singleton
+    private static ControllerContribuinte instancia; //singleton
 
-    public ControllerCDA() {
-//        if (this.funcionarios == null) {
-//            Funcionario admin = new Funcionario(1,"Admin",1999,12,31,99999999,3);//apenas para inicializar
-//            this.funcionarios = new ArrayList<>();
-//            this.funcionarios.add(admin);
-//        }
-
+    public ControllerContribuinte() {
     }
 
-    public static ControllerCDA getInstancia() {
+    public static ControllerContribuinte getInstancia() {
         if (instancia == null) {
-            instancia = new ControllerCDA();
+            instancia = new ControllerContribuinte();
         }
         return instancia;
     }

@@ -64,7 +64,21 @@ public class CDA {
 		return situacaoCDA;
 	}
 	public void setSituacaoCDA(int situacao) {
-		this.situacaoCDA = situacao;
+		switch(situacao) {
+			case 1:
+				this.situacaoCDA = SITUACAO.EMABERTO;
+				break;
+			case 2:
+				this.situacaoCDA = SITUACAO.QUITADO;
+				break;	
+			case 3:
+				this.situacaoCDA = SITUACAO.CANCELADO;
+				break;	
+			case 4:
+				this.situacaoCDA = SITUACAO.PARCELADO;
+				break;		
+		}
+
 	}
 	
 	
