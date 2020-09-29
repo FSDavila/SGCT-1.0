@@ -16,7 +16,7 @@ public class Contribuinte extends Pessoa{
 	
 	public Contribuinte(String nome, Date DNF, int identificacao, String login, String senha, String email, Date dtCadastroChat,
 			boolean ehCNPJ) {
-		super(nome, DNF);
+		super(nome, DNF, login, senha);
 		this.identificacao = identificacao;
 		this.login = login;
 		this.senha = senha;

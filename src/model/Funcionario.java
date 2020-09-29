@@ -16,8 +16,8 @@ public class Funcionario extends Pessoa {
 
 
 
-	public Funcionario(String nome, Date DNF, int cpf, Date dataAdmissao, String email, boolean ehAdm) {
-		super(nome, DNF);
+	public Funcionario(String nome, Date DNF, int cpf, Date dataAdmissao, String email, boolean ehAdm, String login, String senha) {
+		super(nome, DNF, login, senha);
 		this.CPF = cpf;
 		this.dataAdmissao = dataAdmissao;
 		this.email = email;

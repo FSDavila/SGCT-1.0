@@ -5,10 +5,14 @@ import java.util.Date;
 public abstract class Pessoa {
 	private String nome;
 	private Date DNF; //data de nascimento ou data de fundacao
+	private String login;
+	private String senha;
 	
-	public Pessoa(String nome, Date DNF) {
+	public Pessoa(String nome, Date DNF, String login, String senha) {
 		this.nome = nome;
 		this.DNF = DNF;
+		this.login = login;
+		this.senha = senha;
 	}
 	
 	public String getNome() {
