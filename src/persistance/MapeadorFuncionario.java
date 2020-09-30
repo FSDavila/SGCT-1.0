@@ -13,14 +13,14 @@ import model.Funcionario;
 public class MapeadorFuncionario{
 	
     private static MapeadorFuncionario instancia; //singleton
-    private HashMap<String, Funcionario> cacheFuncionarios = new HashMap<>();
+    private HashMap<Long, Funcionario> cacheFuncionarios = new HashMap<>();
     private final String filename = "Funcionarios.dat";
     
     private MapeadorFuncionario() {
         load();
     }   
     
-    public Funcionario get(String CPF) {
+    public Funcionario get(Long CPF) {
         return cacheFuncionarios.get(CPF);
     }
     
@@ -35,7 +35,7 @@ public class MapeadorFuncionario{
     
     }        
 
-    public void remove(String CPF) {
+    public void remove(Long CPF) {
         cacheFuncionarios.remove(CPF);
     }
 
@@ -66,7 +66,7 @@ public class MapeadorFuncionario{
             FileInputStream fin = new FileInputStream(filename);
             ObjectInputStream oh = new ObjectInputStream(fin);
             
-            this.cacheFuncionarios = (HashMap<String, Funcionario>) oh.readObject();
+            this.cacheFuncionarios = (HashMap<Long, Funcionario>) oh.readObject();
             
             oh.close();
             fin.close();

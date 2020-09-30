@@ -81,7 +81,8 @@ public class Login extends JPanel {
 		JButton btnNewButton = new JButton("Logar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Contribuinte procurado = ControllerContribuinte.getInstancia().getContribuinteByLogin(textField.getText());
+				Contribuinte cprocurado = ControllerContribuinte.getInstancia().getContribuinteByLogin(textField.getText());
+				Funcionario fprocurado = ControllerFuncionario.getInstancia().getFuncionarioByLogin(textField.getText());
 				if(procurado != null) {
 					JOptionPane.showMessageDialog(null, "Logado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 					JFrame frame = new JFrame();
