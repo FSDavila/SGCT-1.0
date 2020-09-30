@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Funcionario extends Pessoa{
 	
-	private int CPF;
+	private String CPF;
 	private Date dataAdmissao;
 	private String email;
 	private boolean ehAdm;
@@ -14,7 +14,7 @@ public class Funcionario extends Pessoa{
 		super();
 	}
 
-	public Funcionario(String nome, Date DNF, int cpf, Date dataAdmissao, String email, boolean ehAdm, String login, String senha) {
+	public Funcionario(String nome, Date DNF, String cpf, Date dataAdmissao, String email, boolean ehAdm, String login, String senha) {
 		super(nome, DNF, login, senha);
 		this.CPF = cpf;
 		this.dataAdmissao = dataAdmissao;
@@ -22,11 +22,11 @@ public class Funcionario extends Pessoa{
 		this.ehAdm = ehAdm;
 	}
 
-	public int getCPF() {
+	public String getCPF() {
 		return CPF;
 	}
 
-	public void setCPF(int cPF) {
+	public void setCPF(String cPF) {
 		CPF = cPF;
 	}
 

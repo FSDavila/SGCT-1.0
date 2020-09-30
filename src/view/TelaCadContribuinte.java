@@ -40,6 +40,7 @@ public class TelaCadContribuinte extends JFrame {
 	private JDateChooser dateChooserDNF;
 	private JButton btnConfirmar;
 	private JButton btnCadastrar;
+	private JButton btnCancelar;
 
 	/**
 	 * Launch the application.
@@ -104,7 +105,7 @@ public class TelaCadContribuinte extends JFrame {
 		panel.add(textFieldEmail);
 		
 		
-		btnConfirmar = new JButton("Confirmar");
+		btnConfirmar = new JButton("OK");
 		btnConfirmar.setEnabled(false);
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -138,7 +139,9 @@ public class TelaCadContribuinte extends JFrame {
     				dateChooserDNF.setDate(null);
     				checkBoxEhCNPJ.setSelected(false);
     				btnConfirmar.setEnabled(false);
+    				btnCancelar.setEnabled(false);
     				btnCadastrar.setEnabled(true);
+
     				
 
                     
@@ -161,7 +164,7 @@ public class TelaCadContribuinte extends JFrame {
 			
 			
         
-		btnConfirmar.setBounds(198, 187, 108, 23);
+		btnConfirmar.setBounds(242, 187, 64, 23);
 		panel.add(btnConfirmar);
 		
 		dateChooserDNF = new JDateChooser("dd/MM/yyyy", "##/##/#####", '_');
@@ -210,11 +213,38 @@ public class TelaCadContribuinte extends JFrame {
 				checkBoxEhCNPJ.setEnabled(true);
 				dateChooserDNF.setEnabled(true);
 				btnConfirmar.setEnabled(true);
+				btnCancelar.setEnabled(true);
 				btnCadastrar.setEnabled(false);
 			}
 		});
 		btnCadastrar.setBounds(10, 187, 108, 23);
 		panel.add(btnCadastrar);
+		
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setEnabled(false);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				textFieldIdentificacao.setEnabled(false);
+				textFieldNome.setEnabled(false);
+				textFieldEmail.setEnabled(false);
+				textFieldLogin.setEnabled(false);
+				textFieldSenha.setEnabled(false);
+				checkBoxEhCNPJ.setEnabled(false);
+				dateChooserDNF.setEnabled(false);
+				textFieldIdentificacao.setText("");
+				textFieldNome.setText("");
+				textFieldEmail.setText("");
+				textFieldLogin.setText("");
+				textFieldSenha.setText("");
+				dateChooserDNF.setDate(null);
+				checkBoxEhCNPJ.setSelected(false);
+				btnConfirmar.setEnabled(false);
+				btnCadastrar.setEnabled(true);
+				btnCancelar.setEnabled(false);
+			}
+		});
+		btnCancelar.setBounds(143, 187, 89, 23);
+		panel.add(btnCancelar);
 		
 	}
 }
