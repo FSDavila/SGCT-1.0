@@ -68,29 +68,29 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel textFNome = new JLabel("Nome:");
-		textFNome.setBounds(62, 73, 34, 23);
+		textFNome.setBounds(31, 73, 34, 23);
 		contentPane.add(textFNome);
 		
 		nomeFuncionario = new JTextField();
-		nomeFuncionario.setBounds(106, 74, 309, 20);
+		nomeFuncionario.setBounds(75, 74, 340, 20);
 		contentPane.add(nomeFuncionario);
 		nomeFuncionario.setColumns(10);
 		
 		JLabel textFEmail = new JLabel("Email:");
-		textFEmail.setBounds(62, 107, 34, 14);
+		textFEmail.setBounds(31, 107, 34, 14);
 		contentPane.add(textFEmail);
 		
 		emailFuncionario = new JTextField();
-		emailFuncionario.setBounds(106, 105, 309, 20);
+		emailFuncionario.setBounds(75, 105, 340, 20);
 		contentPane.add(emailFuncionario);
 		emailFuncionario.setColumns(10);
 		
 		JLabel textFCpf = new JLabel("CPF:");
-		textFCpf.setBounds(62, 139, 34, 14);
+		textFCpf.setBounds(31, 139, 34, 14);
 		contentPane.add(textFCpf);
 		
 		cpfFuncionario = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
-		cpfFuncionario.setBounds(106, 136, 100, 20);
+		cpfFuncionario.setBounds(75, 136, 131, 20);
 		contentPane.add(cpfFuncionario);
 		cpfFuncionario.setColumns(10);
 		
@@ -103,20 +103,20 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.add(dateChooser);
 		
 		JCheckBox checkAdm = new JCheckBox("Administrador");
-		checkAdm.setBounds(106, 194, 97, 23);
+		checkAdm.setBounds(75, 194, 97, 23);
 		contentPane.add(checkAdm);
 		
 		JLabel textFLogin = new JLabel("Login:");
-		textFLogin.setBounds(62, 170, 34, 14);
+		textFLogin.setBounds(31, 170, 34, 14);
 		contentPane.add(textFLogin);
 		
 		loginFuncionario = new JTextField();
-		loginFuncionario.setBounds(106, 167, 100, 20);
+		loginFuncionario.setBounds(75, 167, 131, 20);
 		contentPane.add(loginFuncionario);
 		loginFuncionario.setColumns(10);
 		
 		JLabel textFSenha = new JLabel("Senha:");
-		textFSenha.setBounds(262, 170, 44, 14);
+		textFSenha.setBounds(216, 170, 44, 14);
 		contentPane.add(textFSenha);
 		
 		JLabel lblNewLabel = new JLabel("Cadastro Funcionario");
@@ -125,7 +125,7 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		senhaFuncionario = new JPasswordField();
-		senhaFuncionario.setBounds(307, 170, 108, 20);
+		senhaFuncionario.setBounds(259, 167, 160, 20);
 		contentPane.add(senhaFuncionario);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
