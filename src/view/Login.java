@@ -92,7 +92,7 @@ public class Login extends JPanel {
 			    	frame.setSize(230, 300);
 			    	frame.setVisible(true);
 				}
-				else if(cprocurado != null && cprocurado == null) {
+				else if(cprocurado != null && fprocurado == null) {
 					//entrar no chat
 					JOptionPane.showMessageDialog(null, "Contribuinte logado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 				}

@@ -1,17 +1,25 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Contribuinte extends Pessoa{
 	
 	private String identificacao;
-	private String login;
-	private String senha;
 	private String email;
 	private Date dtCadastroChat;
 	private boolean ehCNPJ;
+	private ArrayList<CDA> CDAs = new ArrayList<>();
 	
+	public ArrayList<CDA> getCDAs() {
+		return CDAs;
+	}
+
+	public void setCDAs(ArrayList<CDA> cDAs) {
+		CDAs = cDAs;
+	}
+
 	public Contribuinte () {
 		super();
 	}
@@ -20,8 +28,6 @@ public class Contribuinte extends Pessoa{
 			boolean ehCNPJ) {
 		super(nome, DNF, login, senha);
 		this.identificacao = identificacao;
-		this.login = login;
-		this.senha = senha;
 		this.email = email;
 		this.dtCadastroChat = dtCadastroChat;
 		this.ehCNPJ = ehCNPJ;

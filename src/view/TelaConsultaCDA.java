@@ -10,16 +10,40 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import model.CDA;
+
 import javax.swing.UIManager;
+import java.awt.GridLayout;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import java.awt.CardLayout;
+import javax.swing.BoxLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import net.miginfocom.swing.MigLayout;
+import persistance.MapeadorCDA;
+import persistance.MapeadorContribuinte;
+
+import java.awt.FlowLayout;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class TelaConsultaCDA extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTable table;
+	private JTextField textFieldID;
+	private JTextField textFieldCDA;
+	private JTable tabelaResultados;
 
 	/**
 	 * Launch the application.
@@ -42,60 +66,117 @@ public class TelaConsultaCDA extends JFrame {
 	 */
 	public TelaConsultaCDA() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 469, 479);
+		setBounds(100, 100, 321, 501);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		textField = new JTextField();
-		textField.setBounds(173, 45, 86, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		JScrollPane barraRolagem = new JScrollPane(tabelaResultados);
+		contentPane.add(barraRolagem);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(24, 45, 86, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		JLabel labelCDA = new JLabel("n\u00BA CDA:");
+		contentPane.add(labelCDA);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("New radio button");
-		rdbtnNewRadioButton.setBounds(326, 44, 109, 23);
-		contentPane.add(rdbtnNewRadioButton);
+		textFieldCDA = new JTextField();
+		textFieldCDA.setColumns(10);
+		contentPane.add(textFieldCDA);
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("New radio button");
-		rdbtnNewRadioButton_1.setBounds(326, 66, 109, 23);
+		JLabel LabelCPF = new JLabel("CPF / CNPJ");
+		contentPane.add(LabelCPF);
+		
+		textFieldID = new JTextField();
+		textFieldID.setColumns(10);
+		contentPane.add(textFieldID);
+		
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("CDA");
 		contentPane.add(rdbtnNewRadioButton_1);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(24, 30, 46, 14);
-		contentPane.add(lblNewLabel);
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("pCDA");
+		contentPane.add(rdbtnNewRadioButton);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(174, 30, 46, 14);
-		contentPane.add(lblNewLabel_1);
-		
-		JScrollPane barraRolagem = new JScrollPane(table);
-		getContentPane().add(barraRolagem);
-		
-		table = new JTable();
-		table.setBorder(UIManager.getBorder("ComboBox.border"));
-		table.setColumnSelectionAllowed(true);
-		table.setCellSelectionEnabled(true);
-		table.setModel(new DefaultTableModel(
+		tabelaResultados = new JTable();
+		tabelaResultados.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"1111", "11", null},
-				{"111", "111", "11"},
 				{null, null, null},
-				{"11112", null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
 			},
 			new String[] {
-				"nCDA", "Tipo do Imposto", "Valor Atualizado"
+				"nCDA", "Tipo Imposto", "Valor"
 			}
 		));
-		table.getColumnModel().getColumn(1).setPreferredWidth(153);
-		table.getColumnModel().getColumn(2).setPreferredWidth(103);
-		table.setBounds(24, 410, 411, -297);
-		contentPane.add(table);
-		table.setVisible(true);
+		tabelaResultados.setColumnSelectionAllowed(true);
+		tabelaResultados.setBorder(UIManager.getBorder("ComboBox.border"));
+		tabelaResultados.setCellSelectionEnabled(true);
+		contentPane.add(tabelaResultados);
+		tabelaResultados.setVisible(true);
+		
+		JButton btnNewButton = new JButton("Consultar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String nCDA = textFieldCDA.getText();
+				String id = textFieldID.getText();
+				if(!nCDA.equals("") && !id.equals("")) {
+					JOptionPane.showMessageDialog(null, "Favor usar apenas um criterio para pesquisa!");
+				}
+				else if(!nCDA.equals("") && id.equals("")){
+					CDA procurada = MapeadorCDA.getInstancia().get(Integer.parseInt(nCDA));
+					if(procurada != null) {
+						tabelaResultados.setModel(new DefaultTableModel(
+								new Object[][] {
+									{procurada.getNCDA(), procurada.getTipoImposto(), procurada.getValor()},
+								},
+								new String[] {
+									"nCDA", "Tipo Imposto", "Valor"
+								}
+							));
+						JOptionPane.showMessageDialog(null, "Consulta efetuada.");
+					}
+			
+				}
+				else if(nCDA.equals("") && !id.equals("")){
+					CDA[] cdas = MapeadorContribuinte.getInstancia().get(id).getCDAs().toArray(new CDA[MapeadorContribuinte.getInstancia().get(id).getCDAs().size()]);
+					String[][] dados = new String[3][cdas.length];
+					for(int i = 0; i == cdas.length; i++ ) {
+						dados[i][0] = Integer.toString(cdas[i].getNCDA());
+						dados[i][1] = Integer.toString(cdas[i].getTipoImposto().getCodImposto());
+						dados[i][2] = Double.toString(cdas[i].getValor());			
+					}
+					if(cdas != null) {
+						tabelaResultados.setModel(new DefaultTableModel(
+								dados, //tabela com as cdas
+								new String[] {
+									"nCDA", "Tipo Imposto", "Valor"
+								}
+							));
+						JOptionPane.showMessageDialog(null, "Consulta efetuada.");
+					}
+			
+				}
+				
+				else {
+					JOptionPane.showMessageDialog(null, "Existem erros de digitação ou os dados não existem. Verifique o campo digitado.");
+				}
+			}			
+		});
+		contentPane.add(btnNewButton);
 	}
 }
