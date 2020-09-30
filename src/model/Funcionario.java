@@ -1,11 +1,10 @@
 package model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Funcionario extends Pessoa{
-	
-	private int CPF;
+public class Funcionario extends Pessoa {
+
+	private Long CPF;
 	private Date dataAdmissao;
 	private String email;
 	private boolean ehAdm;
@@ -14,19 +13,20 @@ public class Funcionario extends Pessoa{
 		super();
 	}
 
-	public Funcionario(String nome, Date DNF, int cpf, Date dataAdmissao, String email, boolean ehAdm, String login, String senha) {
+	public Funcionario(String nome, Date DNF, String login, String senha, Long cPF,
+			Date dataAdmissao, String email, boolean ehAdm) {
 		super(nome, DNF, login, senha);
-		this.CPF = cpf;
+		CPF = cPF;
 		this.dataAdmissao = dataAdmissao;
 		this.email = email;
 		this.ehAdm = ehAdm;
 	}
 
-	public int getCPF() {
+	public Long getCPF() {
 		return CPF;
 	}
 
-	public void setCPF(int cPF) {
+	public void setCPF(Long cPF) {
 		CPF = cPF;
 	}
 
