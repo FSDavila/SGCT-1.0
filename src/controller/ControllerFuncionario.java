@@ -46,9 +46,9 @@ public class ControllerFuncionario {
 		return null;
 	}
 
-	public Funcionario getFuncionarioByLogin(String login, String senha) {
+	public Funcionario getFuncionarioByLogin(String login) {
 		for (Funcionario funcionario : MapeadorFuncionario.getInstancia().getList()) {
-			if (funcionario.getLogin().equals(login) && funcionario.getSenha().equals(senha)) {
+			if (funcionario.getLogin().equals(login)) {
 				return funcionario;
 			}
 		}
@@ -58,7 +58,8 @@ public class ControllerFuncionario {
 
 	public Funcionario cadastrarFuncionario(String nome, Date DNF, Long cpf, Date dataAdmissao, String email,
 			boolean ehAdmin, String login, String senha) {
-		Funcionario funcionario = new Funcionario(nome, DNF, login, senha, cpf, dataAdmissao, email, ehAdmin);
+		Date dataAtual = new Date();
+		Funcionario funcionario = new Funcionario(nome, DNF, cpf, dataAtual, email, ehAdmin, login, senha);
 		MapeadorFuncionario.getInstancia().put(funcionario);
 		return funcionario;
 	}

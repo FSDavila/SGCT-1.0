@@ -24,6 +24,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import controller.ControllerContribuinte;
+import controller.ControllerFuncionario;
 import persistance.MapeadorContribuinte;
 import persistance.MapeadorFuncionario;
 import model.Contribuinte;
@@ -83,16 +84,19 @@ public class Login extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				Contribuinte cprocurado = ControllerContribuinte.getInstancia().getContribuinteByLogin(textField.getText());
 				Funcionario fprocurado = ControllerFuncionario.getInstancia().getFuncionarioByLogin(textField.getText());
-				if(procurado != null) {
-					JOptionPane.showMessageDialog(null, "Logado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+				if(fprocurado != null && cprocurado == null) {
+					JOptionPane.showMessageDialog(null, "Funcionario logado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 					JFrame frame = new JFrame();
 					MainMenu menuPrincipal = new MainMenu();
 			    	frame.getContentPane().add(menuPrincipal);
 			    	frame.setSize(230, 300);
 			    	frame.setVisible(true);
 				}
+				else if(cprocurado != null && cprocurado == null) {
+					//entrar no chat
+					JOptionPane.showMessageDialog(null, "Contribuinte logado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+				}
 				else {
-					System.out.println(procurado.getNome());
 					JOptionPane.showMessageDialog(null, "Verifique os dados digitados e tente novamente.", "Aviso", JOptionPane.WARNING_MESSAGE);
 					JFrame frame = new JFrame();
 					MainMenu menuPrincipal = new MainMenu();
