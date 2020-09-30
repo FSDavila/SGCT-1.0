@@ -3,9 +3,8 @@ package model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Funcionario extends Pessoa implements Serializable {
+public class Funcionario extends Pessoa{
 	
-	private static final long serialVersionUID = 1L;
 	private int CPF;
 	private Date dataAdmissao;
 	private String email;
