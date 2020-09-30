@@ -5,21 +5,27 @@ import java.awt.EventQueue;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import com.toedter.calendar.JDayChooser;
 
 import controller.ControllerContribuinte;
+import model.Contribuinte;
+import persistance.MapeadorContribuinte;
 
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.lang.System.Logger;
 import java.awt.event.ActionEvent;
 
 public class TelaCadContribuinte extends JFrame {
@@ -30,6 +36,8 @@ public class TelaCadContribuinte extends JFrame {
 	private JTextField textFieldEmail;
 	private JTextField textFieldLogin;
 	private JTextField textFieldSenha;
+	private JCheckBox checkBoxEhCNPJ;
+	private JDateChooser dateChooserDNF;
 
 	/**
 	 * Launch the application.
@@ -94,13 +102,43 @@ public class TelaCadContribuinte extends JFrame {
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//int motiveCounter = ControllerContribuinte.getInstancia().cadastraContribuinte(nome, DNF, identificacao, login, senha, email, dtCadastroChat, ehCNPJ)
+				 try {
+				String identificacao = textFieldIdentificacao.getText();
+				String nome = textFieldNome.getText();
+				String login = textFieldLogin.getText();
+				String senha = textFieldSenha.getText();
+				String email = textFieldEmail.getText();
+				boolean ehCNPJ = checkBoxEhCNPJ.isSelected();
+				Date DNF = dateChooserDNF.getDate();
+				
+				Contribuinte novo = ControllerContribuinte.getInstancia().cadastraContribuinte(nome, DNF, identificacao, login, senha, email, ehCNPJ);
+				
+				if (novo != null) {
+                    try {
+                    MapeadorContribuinte.getInstancia().persist();
+                    } 
+                    catch (FileNotFoundException ex) {
+                        System.out.println("Arquivo de serializacao criado com sucesso. Favor cadastrar novamente");
+                    }
+
+				}
+				else {
+                    JOptionPane.showMessageDialog(null, "Verifique os dados digitados e tente novamente.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                }
+				
+				 }
+                  catch (NullPointerException a) {
+                     JOptionPane.showMessageDialog(null, "Verifique os dados digitados e tente novamente.", "Aviso", JOptionPane.WARNING_MESSAGE);
+                 }
 			}
 		});
+			
+			
+        
 		btnConfirmar.setBounds(10, 187, 108, 23);
 		panel.add(btnConfirmar);
 		
-		JDateChooser dateChooserDNF = new JDateChooser("dd/MM/yyyy", "##/##/#####", '_');
+		dateChooserDNF = new JDateChooser("dd/MM/yyyy", "##/##/#####", '_');
 		dateChooserDNF.setBounds(10, 144, 108, 20);
 		panel.add(dateChooserDNF);
 		
@@ -126,7 +164,7 @@ public class TelaCadContribuinte extends JFrame {
 		lblSenha.setBounds(220, 126, 86, 14);
 		panel.add(lblSenha);
 		
-		JCheckBox checkBoxEhCNPJ = new JCheckBox("Cliente Pessoa Jur\u00EDdica");
+		checkBoxEhCNPJ = new JCheckBox("Cliente Pessoa Jur\u00EDdica");
 		checkBoxEhCNPJ.setBounds(6, 56, 149, 23);
 		panel.add(checkBoxEhCNPJ);
 		

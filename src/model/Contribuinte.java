@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 public class Contribuinte extends Pessoa{
-	private int identificacao;
+	
+	private String identificacao;
 	private String login;
 	private String senha;
 	private String email;
@@ -14,7 +16,7 @@ public class Contribuinte extends Pessoa{
 		super();
 	}
 	
-	public Contribuinte(String nome, Date DNF, int identificacao, String login, String senha, String email, Date dtCadastroChat,
+	public Contribuinte(String nome, Date DNF, String identificacao, String login, String senha, String email, Date dtCadastroChat,
 			boolean ehCNPJ) {
 		super(nome, DNF, login, senha);
 		this.identificacao = identificacao;
@@ -25,11 +27,11 @@ public class Contribuinte extends Pessoa{
 		this.ehCNPJ = ehCNPJ;
 	}
 
-	public int getIdentificacao() {
+	public String getIdentificacao() {
 		return identificacao;
 	}
 
-	public void setIdentificacao(int identificacao) {
+	public void setIdentificacao(String identificacao) {
 		this.identificacao = identificacao;
 	}
 

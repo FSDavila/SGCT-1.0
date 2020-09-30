@@ -13,14 +13,14 @@ import model.Contribuinte;
 public class MapeadorContribuinte{
 	
     private static MapeadorContribuinte instancia; //singleton
-    private HashMap<Integer, Contribuinte> cacheContribuintes = new HashMap<>();
+    private HashMap<String, Contribuinte> cacheContribuintes = new HashMap<>();
     private final String filename = "Contribuintes.dat";
     
     private MapeadorContribuinte() {
         load();
     }   
     
-    public Contribuinte get(Integer identificacao) {
+    public Contribuinte get(String identificacao) {
         return cacheContribuintes.get(identificacao);
     }
     
@@ -35,7 +35,7 @@ public class MapeadorContribuinte{
     
     }        
 
-    public void remove(Integer identificacao) {
+    public void remove(String identificacao) {
         cacheContribuintes.remove(identificacao);
     }
 
@@ -66,7 +66,7 @@ public class MapeadorContribuinte{
             FileInputStream fin = new FileInputStream(filename);
             ObjectInputStream oh = new ObjectInputStream(fin);
             
-            this.cacheContribuintes = (HashMap<Integer, Contribuinte>) oh.readObject();
+            this.cacheContribuintes = (HashMap<String, Contribuinte>) oh.readObject();
             
             oh.close();
             fin.close();

@@ -62,7 +62,7 @@ public class Login extends JPanel {
 		textField = new JTextField();
 		textField.setBounds(43, 110, 154, 20);
 		add(textField);
-		textField.setColumns(10);
+		textField.setColumns(30);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(43, 168, 154, 20);
@@ -82,16 +82,20 @@ public class Login extends JPanel {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Contribuinte procurado = ControllerContribuinte.getInstancia().getContribuinteByLogin(textField.getText());
-				if(procurado != null && procurado.getSenha() == passwordField.toString()) {
-					JOptionPane.showMessageDialog(null, "Logado com sucesso!.", "Aviso", JOptionPane.WARNING_MESSAGE);
+				if(procurado != null) {
+					JOptionPane.showMessageDialog(null, "Logado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+					JFrame frame = new JFrame();
 					MainMenu menuPrincipal = new MainMenu();
-					setVisible(false);
+			    	frame.getContentPane().add(menuPrincipal);
+			    	frame.setSize(230, 300);
+			    	frame.setVisible(true);
 				}
 				else {
+					System.out.println(procurado.getNome());
 					JOptionPane.showMessageDialog(null, "Verifique os dados digitados e tente novamente.", "Aviso", JOptionPane.WARNING_MESSAGE);
 					JFrame frame = new JFrame();
 					MainMenu menuPrincipal = new MainMenu();
-			    	frame.add(menuPrincipal);
+			    	frame.getContentPane().add(menuPrincipal);
 			    	frame.setSize(300, 300);
 			    	frame.setVisible(true);
 				}

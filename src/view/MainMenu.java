@@ -20,11 +20,11 @@ public class MainMenu extends JPanel {
 		setLayout(null);
 		
 		JButton btnNewButton_2 = new JButton("Cadastro de Funcionarios");
-		btnNewButton_2.setBounds(31, 179, 161, 23);
+		btnNewButton_2.setBounds(33, 70, 161, 23);
 		add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Consulta de CDAs");
-		btnNewButton_3.setBounds(31, 213, 161, 23);
+		btnNewButton_3.setBounds(33, 104, 161, 23);
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -37,7 +37,7 @@ public class MainMenu extends JPanel {
 				//System.exit(0); //sair do sistema
 			}
 		});
-		btnNewButton.setBounds(31, 247, 161, 23);
+		btnNewButton.setBounds(33, 138, 161, 23);
 		add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("Menu Principal");
@@ -52,7 +52,7 @@ public class MainMenu extends JPanel {
 				telaPrototype.setVisible(true);
 			}
 		});
-		btnNewButton_1.setBounds(31, 145, 161, 23);
+		btnNewButton_1.setBounds(33, 36, 161, 23);
 		add(btnNewButton_1);
 
 	}

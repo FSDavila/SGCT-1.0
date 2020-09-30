@@ -1,8 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public abstract class Pessoa {
+public class Pessoa implements Serializable{
+	
 	private String nome;
 	private Date DNF; // data de nascimento ou data de fundacao
 	private String login;

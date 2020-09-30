@@ -7,6 +7,7 @@ import model.Contribuinte;
 import model.Imposto;
 import model.SITUACAO;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -24,7 +25,7 @@ public class ControllerContribuinte {
         return instancia;
     }
 
-    public Contribuinte getContribuinteById(int id) {
+    public Contribuinte getContribuinteById(String id) {
     	if (MapeadorContribuinte.getInstancia().get(id) != null) {
     		return MapeadorContribuinte.getInstancia().get(id);
     	}
@@ -33,25 +34,26 @@ public class ControllerContribuinte {
     
     public Contribuinte getContribuinteByLogin(String login) {
 		for(Contribuinte contribuinte : MapeadorContribuinte.getInstancia().getList()) {
-			if(contribuinte.getLogin() == login) {
+			if(contribuinte.getLogin().equals(login)) {
 				return contribuinte;
 			}
 		}
 		return null;
     }
 
-    public int cadastraContribuinte(String nome, Date DNF, int identificacao, String login, String senha, String email, Date dtCadastroChat,
+    public Contribuinte cadastraContribuinte(String nome, Date DNF, String identificacao, String login, String senha, String email,
 			boolean ehCNPJ) {
-            Contribuinte novo = new Contribuinte(nome, DNF, identificacao, login, senha, email, dtCadastroChat, ehCNPJ);
+			Date dataAtual = new Date(); //pega data de cadastro
+            Contribuinte novo = new Contribuinte(nome, DNF, identificacao, login, senha, email, dataAtual, ehCNPJ);
             MapeadorContribuinte.getInstancia().put(novo);
-            return 1;
+            return novo;
     }
 
-    public void excluiContribuinte(int identificacao) { //existe apenas para corrigir dados de forma interna, se necessario
+    public void excluiContribuinte(String identificacao) { //existe apenas para corrigir dados de forma interna, se necessario
     	MapeadorContribuinte.getInstancia().remove(identificacao);
     }
     
-    public void alteraDados(int identificacao, String nome, Date DNF, String login, String senha, String email, Date dtCadastroChat,
+    public void alteraDados(String identificacao, String nome, Date DNF, String login, String senha, String email, Date dtCadastroChat,
 			boolean ehCNPJ) { 
     	Contribuinte alterar = MapeadorContribuinte.getInstancia().get(identificacao);
     	alterar.setDNF(DNF);

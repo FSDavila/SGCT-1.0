@@ -1,10 +1,12 @@
 package model;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Date;
 
-public class CDA {
+public class CDA implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private Integer nCDA;
 	private double valor;
 	private Imposto tipoImposto;

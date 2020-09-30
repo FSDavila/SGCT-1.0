@@ -20,7 +20,7 @@ public class Main {
     	JFrame frame = new JFrame();
     	Login telaLogin = new Login();
     	frame.add(telaLogin);
-    	frame.setSize(300, 300);
+    	frame.setSize(260, 330);
     	frame.setVisible(true);
     }
     
