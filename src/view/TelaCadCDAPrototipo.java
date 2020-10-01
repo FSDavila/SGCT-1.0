@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JFormattedTextField;
@@ -45,6 +46,8 @@ public class TelaCadCDAPrototipo extends JFrame {
 	private JButton btnConfirmar;
 	private JButton btnCadastrar;
 	private JButton btnCancelar;
+	
+	private static TelaCadCDAPrototipo instancia;
 
 	/**
 	 * Launch the application.
@@ -61,12 +64,18 @@ public class TelaCadCDAPrototipo extends JFrame {
 			}
 		});
 	}
+	
+    public static TelaCadCDAPrototipo getInstancia() {
+        if (instancia == null) {
+            instancia = new TelaCadCDAPrototipo();
+        }
+        return instancia;
+    }
 
 	/**
 	 * Create the frame.
 	 */
 	public TelaCadCDAPrototipo() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 350, 270);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

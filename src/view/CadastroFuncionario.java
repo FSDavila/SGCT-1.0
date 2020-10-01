@@ -37,8 +37,8 @@ public class CadastroFuncionario extends JFrame {
 	private JTextField cpfFuncionario;
 	private JTextField loginFuncionario;
 	private JPasswordField senhaFuncionario;
-
-	ControllerFuncionario controlerFuncionario = new ControllerFuncionario();
+	
+	private static CadastroFuncionario instancia;
 
 	/**
 	 * Launch the application.
@@ -55,6 +55,13 @@ public class CadastroFuncionario extends JFrame {
 			}
 		});
 	}
+	
+    public static CadastroFuncionario getInstancia() {
+        if (instancia == null) {
+            instancia = new CadastroFuncionario();
+        }
+        return instancia;
+    }
 
 	/**
 	 * Create the frame.

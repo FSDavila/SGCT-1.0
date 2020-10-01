@@ -41,6 +41,8 @@ public class TelaCadContribuinte extends JFrame {
 	private JButton btnConfirmar;
 	private JButton btnCadastrar;
 	private JButton btnCancelar;
+	
+	private static TelaCadContribuinte instancia;
 
 	/**
 	 * Launch the application.
@@ -57,6 +59,13 @@ public class TelaCadContribuinte extends JFrame {
 			}
 		});
 	}
+	
+    public static TelaCadContribuinte getInstancia() {
+        if (instancia == null) {
+            instancia = new TelaCadContribuinte();
+        }
+        return instancia;
+    }
 
 	/**
 	 * Create the frame.
