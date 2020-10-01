@@ -1,6 +1,5 @@
 import javax.swing.JFrame;
 
-import view.Login;
 import view.TelaLogin;
 
 /*

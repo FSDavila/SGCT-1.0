@@ -12,7 +12,7 @@ public enum SITUACAO {
 		this.codSituacao = codSituacao;
 	}
 
-	public int getCodImposto() {
+	public int getCodCDA() {
 		return codSituacao;
 	}
 

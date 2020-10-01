@@ -200,6 +200,6 @@ public class CadastroFuncionario extends JFrame {
 		});
 		Alterar.setBounds(217, 259, 89, 23);
 		contentPane.add(Alterar);
-
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	}
 }

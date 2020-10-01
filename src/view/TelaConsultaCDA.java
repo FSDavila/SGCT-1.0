@@ -83,10 +83,6 @@ public class TelaConsultaCDA extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JScrollPane barraRolagem = new JScrollPane(tabelaResultados);
-		barraRolagem.setBounds(34, 20, 2, 2);
-		contentPane.add(barraRolagem);
-		
 		JLabel labelCDA = new JLabel("CDA / pCDA:");
 		labelCDA.setBounds(47, 11, 84, 14);
 		contentPane.add(labelCDA);
@@ -199,6 +195,7 @@ public class TelaConsultaCDA extends JFrame {
 		scrollPane.setBounds(34, 67, 381, 389);
 		scrollPane.setViewportView(tabelaResultados);
 		contentPane.add(scrollPane);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	}
 	
 	

@@ -254,6 +254,6 @@ public class TelaCadContribuinte extends JFrame {
 		});
 		btnCancelar.setBounds(143, 187, 89, 23);
 		panel.add(btnCancelar);
-		
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	}
 }

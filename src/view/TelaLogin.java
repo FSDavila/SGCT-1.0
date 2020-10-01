@@ -59,7 +59,6 @@ public class TelaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaLogin() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 250, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -80,6 +79,7 @@ public class TelaLogin extends JFrame {
 				if(fprocurado != null && cprocurado == null) {
 					JOptionPane.showMessageDialog(null, "Funcionario logado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 					TelaMenuPrincipal.getInstancia().setVisible(true);
+					setVisible(false);
 				}
 				else if(cprocurado != null && fprocurado == null) {
 					//entrar no chat
