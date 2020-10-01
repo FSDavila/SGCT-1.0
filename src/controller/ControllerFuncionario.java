@@ -18,22 +18,22 @@ public class ControllerFuncionario {
 		return instancia;
 	}
 
-	public boolean cpfValido(Long cpf) {
-		String CPF = Long.toString(cpf);
-		if (cpf != 0 && CPF.length() == 11) {
+	public boolean cpfValido(String cpf) {
+		cpf.replaceAll(". -", "");
+		if (cpf.length() == 11) {
 			return true;
 		}
 		return false;
 	}
-	
-	public boolean validaCamposCadastro(String nome, Long cpf, String email, String login, String senha) {
+
+	public boolean validaCamposCadastro(String nome, String cpf, String email, String login, String senha) {
 		if (nome.trim().equals("") || cpfValido(cpf) || email.trim().equals("") || senha.trim().equals("")) {
 			return false;
 		}
-		return true;	
+		return true;
 	}
 
-	public Funcionario getFuncionarioByCpf(Long cpf) {
+	public Funcionario getFuncionarioByCpf(String cpf) {
 		if (cpfValido(cpf)) {
 			for (Funcionario funcionario : MapeadorFuncionario.getInstancia().getList()) {
 				if (funcionario.getCPF() == cpf) {
@@ -56,15 +56,22 @@ public class ControllerFuncionario {
 
 	}
 
-	public Funcionario cadastrarFuncionario(String nome, Date DNF, Long cpf, Date dataAdmissao, String email,
+	public Funcionario cadastrarFuncionario(String nome, Date DNF, String cpf, Date dataAdmissao, String email,
 			boolean ehAdmin, String login, String senha) {
-		Date dataAtual = new Date();
-		Funcionario funcionario = new Funcionario(nome, DNF, cpf, dataAtual, email, ehAdmin, login, senha);
-		MapeadorFuncionario.getInstancia().put(funcionario);
+		
+		Funcionario funcionario = null;
+		
+		if (getFuncionarioByLogin(login) == null || !getFuncionarioByLogin(login).getLogin().equals(login)) {
+			funcionario = new Funcionario(nome, DNF, cpf, dataAdmissao, email, ehAdmin, login, senha);
+			MapeadorFuncionario.getInstancia().put(funcionario);
+		}
+
 		return funcionario;
+
 	}
 
-	public void atualizarFuncionario(String nome, Date DNF, Long cpf, Date dataAdmissao, String email, boolean ehAdmin) {
+	public void atualizarFuncionario(String nome, Date DNF, String cpf, Date dataAdmissao, String email,
+			boolean ehAdmin) {
 		Funcionario funcionario = MapeadorFuncionario.getInstancia().get(cpf);
 		funcionario.setNome(nome);
 		funcionario.setEmail(email);

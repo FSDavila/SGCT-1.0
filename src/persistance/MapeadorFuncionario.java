@@ -23,7 +23,7 @@ public class MapeadorFuncionario{
     public Funcionario get(String CPF) {
         return cacheFuncionarios.get(CPF);
     }
-    public Funcionario get2(String CPF) {
+    public Funcionario get3(String CPF) {
         return cacheFuncionarios.get(CPF);
     }
     
