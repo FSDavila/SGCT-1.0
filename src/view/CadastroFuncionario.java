@@ -70,7 +70,7 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel textFNome = new JLabel("Nome:");
-		textFNome.setBounds(31, 73, 34, 23);
+		textFNome.setBounds(31, 73, 44, 23);
 		contentPane.add(textFNome);
 
 		nomeFuncionario = new JTextField();
@@ -79,7 +79,7 @@ public class CadastroFuncionario extends JFrame {
 		nomeFuncionario.setColumns(10);
 
 		JLabel textFEmail = new JLabel("Email:");
-		textFEmail.setBounds(31, 107, 34, 14);
+		textFEmail.setBounds(31, 107, 44, 14);
 		contentPane.add(textFEmail);
 
 		emailFuncionario = new JTextField();
@@ -88,7 +88,7 @@ public class CadastroFuncionario extends JFrame {
 		emailFuncionario.setColumns(10);
 
 		JLabel textFCpf = new JLabel("CPF:");
-		textFCpf.setBounds(31, 139, 34, 14);
+		textFCpf.setBounds(31, 139, 44, 14);
 		contentPane.add(textFCpf);
 
 		try {
@@ -114,7 +114,7 @@ public class CadastroFuncionario extends JFrame {
 		contentPane.add(checkAdm);
 
 		JLabel textFLogin = new JLabel("Login:");
-		textFLogin.setBounds(31, 170, 34, 14);
+		textFLogin.setBounds(31, 170, 44, 14);
 		contentPane.add(textFLogin);
 
 		loginFuncionario = new JTextField();
@@ -173,7 +173,7 @@ public class CadastroFuncionario extends JFrame {
 						e.printStackTrace();
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "", "Aviso",
+					JOptionPane.showMessageDialog(null, "Login Inválido ", "Aviso",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
