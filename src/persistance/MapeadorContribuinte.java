@@ -23,10 +23,7 @@ public class MapeadorContribuinte{
     public Contribuinte get(String identificacao) {
         return cacheContribuintes.get(identificacao);
     }
-    
-    public Contribuinte get2(String identificacao) {
-        return cacheContribuintes.get(identificacao);
-    }
+   
     
     public static MapeadorContribuinte getInstancia(){
         if(instancia == null ){

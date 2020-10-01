@@ -23,9 +23,6 @@ public class MapeadorFuncionario{
     public Funcionario get(String CPF) {
         return cacheFuncionarios.get(CPF);
     }
-    public Funcionario get5(String CPF) {
-        return cacheFuncionarios.get(CPF);
-    }
     
     public static MapeadorFuncionario getInstancia(){
         if(instancia == null ){
