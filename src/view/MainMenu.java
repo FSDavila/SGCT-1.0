@@ -24,12 +24,7 @@ public class MainMenu extends JPanel {
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				CadastroFuncionario telaCDA = null;
-				try {
-					telaCDA = new CadastroFuncionario();
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				telaCDA = new CadastroFuncionario();
 				telaCDA.setVisible(true);
 			}
 		});

@@ -153,6 +153,7 @@ public class TelaConsultaCDA extends JFrame {
 			
 				}
 				else if(nCDA.equals("") && !id.equals("")){
+					try {
 					CDA[] cdas = MapeadorContribuinte.getInstancia().get(id).getCDAs().toArray(new CDA[MapeadorContribuinte.getInstancia().get(id).getCDAs().size()]);
 					String[][] dados = new String[3][cdas.length];
 					for(int i = 0; i == cdas.length; i++ ) {
@@ -169,13 +170,14 @@ public class TelaConsultaCDA extends JFrame {
 							));
 						JOptionPane.showMessageDialog(null, "Consulta efetuada.");
 					}
-			
-				}
+					
 				
 				else {
 					JOptionPane.showMessageDialog(null, "Existem erros de digitação ou os dados não existem. Verifique o campo digitado.");
 				}
-			}			
+			} catch(Exception e) {
+				
+			}
 		});
 		contentPane.add(btnNewButton);
 	}
