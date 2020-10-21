@@ -63,6 +63,7 @@ public class TelaConsultaCDA extends JFrame {
 			}
 		});
 	}
+	
 
 	/**
 	 * Create the frame.
