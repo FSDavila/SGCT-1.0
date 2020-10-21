@@ -26,7 +26,25 @@ public class ControllerFuncionario {
 		return false;
 	}
 
-	public boolean validaCamposCadastro(String nome, String cpf, String email, String login, String senha) {
+	public boolean validaLogin(String login) {
+		if (getFuncionarioByLogin(login) != null) {
+			return false;
+		} else {
+			return true;
+		}
+
+	}
+
+	public boolean validaCpf(String cpf) {
+		if (getFuncionarioByCpf(cpf) != null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public boolean validaCamposNull(String nome, String cpf, String email, String login, String senha) {
+
 		if (nome.trim().equals("") || cpfValido(cpf) || email.trim().equals("") || senha.trim().equals("")) {
 			return false;
 		}
@@ -34,16 +52,13 @@ public class ControllerFuncionario {
 	}
 
 	public Funcionario getFuncionarioByCpf(String cpf) {
-		if (cpfValido(cpf)) {
-			for (Funcionario funcionario : MapeadorFuncionario.getInstancia().getList()) {
-				if (funcionario.getCPF() == cpf) {
-					return funcionario;
-				}
+		for (Funcionario funcionario : MapeadorFuncionario.getInstancia().getList()) {
+			if (funcionario.getCPF().equals(cpf)) {
+				return funcionario;
 			}
-		} else {
-			JOptionPane.showMessageDialog(null, "Cpf Inválido");
 		}
 		return null;
+
 	}
 
 	public Funcionario getFuncionarioByLogin(String login) {
@@ -58,10 +73,10 @@ public class ControllerFuncionario {
 
 	public Funcionario cadastrarFuncionario(String nome, Date DNF, String cpf, Date dataAdmissao, String email,
 			boolean ehAdmin, String login, String senha) {
-		
+
 		Funcionario funcionario = null;
-		
-		if (getFuncionarioByLogin(login) == null || !getFuncionarioByLogin(login).getLogin().equals(login)) {
+
+		if (getFuncionarioByLogin(login) == null) {
 			funcionario = new Funcionario(nome, DNF, cpf, dataAdmissao, email, ehAdmin, login, senha);
 			MapeadorFuncionario.getInstancia().put(funcionario);
 		}
