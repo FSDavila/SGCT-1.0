@@ -194,7 +194,7 @@ public class CadastroFuncionario extends JFrame {
 		Alterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				
+			
 
 			}
 		});
