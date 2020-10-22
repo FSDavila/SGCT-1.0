@@ -5,6 +5,25 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>SGCT 1.0</name>
   <description>SGCT 1.0</description>
+  <dependencies>
+    <dependency>
+    	<groupId>br.com.caelum.stella</groupId>
+    	<artifactId>caelum-stella-core</artifactId>
+    	<version>2.1.2</version>
+    </dependency>
+    <dependency>
+    	<groupId>br.com.caelum.stella</groupId>
+    	<artifactId>caelum-stella-boleto</artifactId>
+    	<version>2.1.2</version>
+    </dependency>
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<version>3.0.1</version>
+		<scope>provided</scope>
+		<optional>true</optional>
+	</dependency>	
+  </dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <resources>

@@ -141,9 +141,8 @@ public class CadastroFuncionario extends JFrame {
 		senhaFuncionario = new JPasswordField();
 		senhaFuncionario.setBounds(259, 167, 160, 20);
 		contentPane.add(senhaFuncionario);
-
 		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.addActionListener(new ActionListener() {
+		 btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Funcionario funcionario = null;
 				String cpf = cpfFuncionario.getText().replaceAll(". -", "");
@@ -185,8 +184,7 @@ public class CadastroFuncionario extends JFrame {
 				}
 			}
 
-		});
-
+		}); 
 		btnCadastrar.setBounds(326, 259, 89, 23);
 		contentPane.add(btnCadastrar);
 

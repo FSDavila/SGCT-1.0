@@ -33,16 +33,16 @@ public class Main {
                 .comVencimento(2, 5, 2008);  
 
         Endereco enderecoBeneficiario = Endereco.novoEndereco()
-        		.comLogradouro("Av das Empresas, 555")  
-        		.comBairro("Bairro Grande")  
-        		.comCep("01234-555")  
-        		.comCidade("São Paulo")  
-        		.comUf("SP");  
+        		.comLogradouro("Av do Governo, 236")  
+        		.comBairro("Centro")  
+        		.comCep("88001-000")  
+        		.comCidade("Florianopolis")  
+        		.comUf("SC");  
 
         //Quem emite o boleto
         Beneficiario beneficiario = Beneficiario.novoBeneficiario()  
-                .comNomeBeneficiario("Fulano de Tal")  
-                .comAgencia("1824").comDigitoAgencia("4")  
+                .comNomeBeneficiario("GOVERNO DO ESTADO DE SANTA CATARINA")  
+                .comAgencia("0001").comDigitoAgencia("1")  
                 .comCodigoBeneficiario("76000")  
                 .comDigitoCodigoBeneficiario("5")  
                 .comNumeroConvenio("1207113")  
@@ -59,7 +59,7 @@ public class Main {
         
         //Quem paga o boleto
         Pagador pagador = Pagador.novoPagador()  
-                .comNome("Fulano da Silva")  
+                .comNome("Contribuilson De Vedor")  
                 .comDocumento("111.222.333-12")
                 .comEndereco(enderecoPagador);
 
@@ -70,10 +70,10 @@ public class Main {
                 .comDatas(datas)  
                 .comBeneficiario(beneficiario)  
                 .comPagador(pagador)  
-                .comValorBoleto("200.00")  
-                .comNumeroDoDocumento("1234")  
-                .comInstrucoes("instrucao 1", "instrucao 2", "instrucao 3", "instrucao 4", "instrucao 5")  
-                .comLocaisDePagamento("local 1", "local 2");  
+                .comValorBoleto("736.00")  
+                .comNumeroDoDocumento("111111")  
+                .comInstrucoes("NAO RECEBER APOS O VENCIMENTO")  
+                .comLocaisDePagamento("Loterica", "Banco do Brasil");  
 
         GeradorDeBoleto gerador = new GeradorDeBoleto(boleto);  
 

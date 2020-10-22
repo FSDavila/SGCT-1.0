@@ -33,7 +33,7 @@ public class ControllerFuncionario {
 			return true;
 		}
 
-	}
+	} 
 
 	public boolean validaCpf(String cpf) {
 		if (getFuncionarioByCpf(cpf) != null) {
