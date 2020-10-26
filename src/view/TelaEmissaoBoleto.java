@@ -12,12 +12,14 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaEmissaoBoleto extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textFieldIdentificacao;
+	private JTextField textFieldTitulo;
 
 	/**
 	 * Launch the application.
@@ -39,54 +41,54 @@ public class TelaEmissaoBoleto extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaEmissaoBoleto() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Identifica\u00E7\u00E3o do Contribuinte:");
-		lblNewLabel.setBounds(10, 11, 192, 14);
-		contentPane.add(lblNewLabel);
+		JLabel labelIdentificacao = new JLabel("Identifica\u00E7\u00E3o do Contribuinte:");
+		labelIdentificacao.setBounds(10, 32, 192, 14);
+		contentPane.add(labelIdentificacao);
 		
-		textField = new JTextField();
-		textField.setBounds(10, 25, 141, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textFieldIdentificacao = new JTextField();
+		textFieldIdentificacao.setBounds(10, 46, 141, 20);
+		contentPane.add(textFieldIdentificacao);
+		textFieldIdentificacao.setColumns(10);
 		
-		JLabel lblNDoTtulo = new JLabel("n\u00BA do T\u00EDtulo");
-		lblNDoTtulo.setBounds(10, 72, 97, 14);
-		contentPane.add(lblNDoTtulo);
+		JLabel labelTitulo = new JLabel("n\u00BA do T\u00EDtulo");
+		labelTitulo.setBounds(10, 72, 97, 14);
+		contentPane.add(labelTitulo);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(10, 86, 86, 20);
-		contentPane.add(textField_1);
+		textFieldTitulo = new JTextField();
+		textFieldTitulo.setColumns(10);
+		textFieldTitulo.setBounds(10, 86, 86, 20);
+		contentPane.add(textFieldTitulo);
 		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(10, 228, 108, 20);
-		contentPane.add(dateChooser);
+		JDateChooser dateChooserVencimento = new JDateChooser();
+		dateChooserVencimento.setBounds(10, 228, 108, 20);
+		contentPane.add(dateChooserVencimento);
 		
-		JButton btnNewButton = new JButton("Gerar Boleto");
-		btnNewButton.setBounds(128, 227, 108, 23);
-		contentPane.add(btnNewButton);
+		JButton btnGerarBoleto = new JButton("Gerar Boleto");
+		btnGerarBoleto.setBounds(128, 227, 108, 23);
+		contentPane.add(btnGerarBoleto);
 		
-		JLabel lblNewLabel_2 = new JLabel("Data de Vencimento");
-		lblNewLabel_2.setBounds(10, 214, 108, 14);
-		contentPane.add(lblNewLabel_2);
+		JLabel labelDataVencimento = new JLabel("Data de Vencimento");
+		labelDataVencimento.setBounds(10, 214, 108, 14);
+		contentPane.add(labelDataVencimento);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("CNPJ");
-		chckbxNewCheckBox.setBounds(153, 24, 97, 23);
-		contentPane.add(chckbxNewCheckBox);
+		JCheckBox chckbxCNPJ = new JCheckBox("CNPJ");
+		chckbxCNPJ.setBounds(153, 45, 97, 23);
+		contentPane.add(chckbxCNPJ);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Parcelamento");
-		rdbtnNewRadioButton.setBounds(6, 139, 109, 23);
-		contentPane.add(rdbtnNewRadioButton);
+		JRadioButton rdbtnParcelamento = new JRadioButton("Parcelamento");
+		rdbtnParcelamento.setBounds(6, 139, 109, 23);
+		contentPane.add(rdbtnParcelamento);
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Pagamento Integral");
-		rdbtnNewRadioButton_1.setBounds(6, 113, 126, 23);
-		contentPane.add(rdbtnNewRadioButton_1);
+		JRadioButton rdbtnPagamentoIntegral = new JRadioButton("Pagamento Integral");
+		rdbtnPagamentoIntegral.setBounds(6, 113, 126, 23);
+		contentPane.add(rdbtnPagamentoIntegral);
 		
 		JLabel labelDocumento = new JLabel("Documento:");
 		labelDocumento.setBounds(314, 11, 97, 14);
@@ -112,9 +114,19 @@ public class TelaEmissaoBoleto extends JFrame {
 		labelValorValue.setBounds(327, 143, 46, 14);
 		contentPane.add(labelValorValue);
 		
-		JButton btnNewButton_1 = new JButton("Confirmar e Salvar");
-		btnNewButton_1.setEnabled(false);
-		btnNewButton_1.setBounds(298, 228, 126, 23);
-		contentPane.add(btnNewButton_1);
+		JButton btnSalvar = new JButton("Confirmar e Salvar");
+		btnSalvar.setEnabled(false);
+		btnSalvar.setBounds(298, 228, 126, 23);
+		contentPane.add(btnSalvar);
+		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+				TelaMenuPrincipal.getInstancia().setVisible(true);
+			}
+		});
+		btnVoltar.setBounds(10, 7, 89, 23);
+		contentPane.add(btnVoltar);
 	}
 }

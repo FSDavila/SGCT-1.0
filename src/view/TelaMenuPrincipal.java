@@ -49,73 +49,83 @@ public class TelaMenuPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaMenuPrincipal() {
-		setBounds(100, 100, 398, 264);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setBounds(100, 100, 250, 420);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
-		JButton btnNewButton_2 = new JButton("Cadastro de Funcionarios"); //somente admin
+		JButton btnNewButton_2 = new JButton("Gest\u00E3o de Funcionarios"); //somente admin
+		btnNewButton_2.setBounds(21, 164, 189, 23);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				CadastroFuncionario.getInstancia().setVisible(true);
-				instancia.setVisible(false);
+				setVisible(false);
 			}
 		});
-		btnNewButton_2.setBounds(208, 66, 161, 23);
+		contentPane.setLayout(null);
 		contentPane.add(btnNewButton_2);
 		
 		JLabel lblNewLabel = new JLabel("Menu Principal");
+		lblNewLabel.setBounds(71, 25, 93, 14);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(54, 24, 93, 14);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnNewButton_5 = new JButton("Cadastro de Contribuinte"); // somente admin
+		JButton btnNewButton_5 = new JButton("Gest\u00E3o de Contribuintes"); // somente admin
+		btnNewButton_5.setBounds(21, 100, 189, 23);
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TelaCadContribuinte.getInstancia().setVisible(true);
+				instancia.setVisible(false);
 			}
 		});
-		btnNewButton_5.setBounds(208, 134, 161, 23);
 		contentPane.add(btnNewButton_5);
 		
 		JButton btnNewButton_4 = new JButton("Consulta de CDAs");
+		btnNewButton_4.setBounds(21, 66, 189, 23);
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TelaConsultaCDA.getInstancia().setVisible(true);
+				setVisible(false);
 			}
 			
 		});
-		btnNewButton_4.setBounds(21, 66, 161, 23);
 		contentPane.add(btnNewButton_4);
 		
-		JButton btnNewButton_1 = new JButton("Cadastrar CDAs"); // somente admin
+		JButton btnNewButton_1 = new JButton("Gest\u00E3o das CDAs"); // somente admin
+		btnNewButton_1.setBounds(21, 134, 189, 23);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				TelaCadContribuinte.getInstancia().setVisible(true);
+				TelaCadCDAPrototipo.getInstancia().setVisible(true);
+				setVisible(false);
 			}
 		});
-		btnNewButton_1.setBounds(21, 134, 161, 23);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton = new JButton("Sair do Sistema");
+		btnNewButton.setBounds(21, 334, 189, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0); //sair do sistema
 			}
 		});
-		btnNewButton.setBounds(21, 178, 161, 23);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_3 = new JButton("Altera\u00E7\u00E3o de Funcion\u00E1rios\r\n");
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				instancia.setVisible(false);
-				CadastroFuncionario.getInstancia().setVisible(true);
-			}
-		});
-		btnNewButton_3.setBounds(208, 100, 161, 23);
+		JButton btnNewButton_3 = new JButton("Emiss\u00E3o de Boletos");
+		btnNewButton_3.setBounds(21, 198, 189, 23);
 		contentPane.add(btnNewButton_3);
+		
+		JButton btnNewButton_6 = new JButton("Relat\u00F3rio de Pagamentos");
+		btnNewButton_6.setBounds(21, 232, 189, 23);
+		contentPane.add(btnNewButton_6);
+		
+		JButton btnNewButton_7 = new JButton("Atendimento ao Chat");
+		btnNewButton_7.setBounds(21, 266, 189, 23);
+		contentPane.add(btnNewButton_7);
+		
+		JButton btnNewButton_8 = new JButton("Parcelamento de CDAs");
+		btnNewButton_8.setBounds(21, 300, 189, 23);
+		contentPane.add(btnNewButton_8);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 	}
 }
