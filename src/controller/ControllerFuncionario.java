@@ -33,7 +33,7 @@ public class ControllerFuncionario {
 			return true;
 		}
 
-	} 
+	}
 
 	public boolean validaCpf(String cpf) {
 		if (getFuncionarioByCpf(cpf) != null) {
@@ -85,12 +85,11 @@ public class ControllerFuncionario {
 
 	}
 
-	public void atualizarFuncionario(String nome, Date DNF, String cpf, Date dataAdmissao, String email,
+	public void atualizarFuncionario(String nome, String cpf, String email,
 			boolean ehAdmin) {
 		Funcionario funcionario = MapeadorFuncionario.getInstancia().get(cpf);
 		funcionario.setNome(nome);
 		funcionario.setEmail(email);
-		funcionario.setDNF(DNF);
 		funcionario.setEhAdm(ehAdmin);
 	}
 

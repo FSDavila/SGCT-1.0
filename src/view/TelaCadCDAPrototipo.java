@@ -341,6 +341,10 @@ public class TelaCadCDAPrototipo extends JFrame {
 		panel.add(btnAlterar);
 		
 		btnConsultar = new JButton("Consultar");
+		btnConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnConsultar.setBounds(263, 228, 124, 23);
 		panel.add(btnConsultar);
 		
