@@ -54,6 +54,7 @@ public class TelaCadCDAPrototipo extends JFrame {
 	private JButton btnConsultar;
 	private JLabel lblNewLabel_2;
 	private JTextField textFieldDescricao;
+	private JButton btnNewButton;
 
 	/**
 	 * Launch the application.
@@ -82,6 +83,7 @@ public class TelaCadCDAPrototipo extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaCadCDAPrototipo() {
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.estado = 0;
 		setBounds(100, 100, 423, 311);
 		contentPane = new JPanel();
@@ -343,7 +345,22 @@ public class TelaCadCDAPrototipo extends JFrame {
 		btnConsultar = new JButton("Consultar");
 		btnConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			}
+				String nCDA = JOptionPane.showInputDialog(null, "Insira o numero da CDA desejada:", "Consulta de CDA", JOptionPane.INFORMATION_MESSAGE);
+				CDA alterar = MapeadorCDA.getInstancia().get(Integer.parseInt(nCDA));
+				if(alterar != null){
+					textFieldNCDA.setText(Integer.toString(alterar.getNCDA()));
+					textFieldID.setText(alterar.getTitular().getIdentificacao());
+					textFieldTipo.setText(Integer.toString(alterar.getTipoImposto().getCodImposto()));
+					textFieldValor.setText(Double.toString(alterar.getValor()));
+					textFieldSituacao.setText(Integer.toString(alterar.getSituacaoCDA().getCodCDA()));
+					textFieldDescricao.setText(alterar.getDescricao());
+					dateChooserDNF.setDate(alterar.getDataVencimento());
+					btnCancelar.setEnabled(true);
+					btnCadastrar.setEnabled(false);
+					btnAlterar.setEnabled(false);
+					btnConsultar.setEnabled(false);
+					estado = 3;
+			}}
 		});
 		btnConsultar.setBounds(263, 228, 124, 23);
 		panel.add(btnConsultar);
@@ -357,6 +374,16 @@ public class TelaCadCDAPrototipo extends JFrame {
 		textFieldDescricao.setBounds(10, 85, 377, 42);
 		panel.add(textFieldDescricao);
 		textFieldDescricao.setColumns(10);
+		
+		btnNewButton = new JButton("Voltar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaMenuPrincipal.getInstancia().setVisible(true);
+				instancia.setVisible(false);
+			}
+		});
+		btnNewButton.setBounds(310, 27, 86, 23);
+		panel.add(btnNewButton);
 		
 	}
 }
