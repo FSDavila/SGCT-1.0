@@ -59,7 +59,7 @@ public class TelaMenuPrincipal extends JFrame {
 		btnNewButton_2.setBounds(21, 164, 189, 23);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				CadastroFuncionario.getInstancia().setVisible(true);
+				TelaGestaoFuncionario.getInstancia().setVisible(true);
 				setVisible(false);
 			}
 		});

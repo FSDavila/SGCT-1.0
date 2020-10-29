@@ -26,7 +26,7 @@ import controller.ControllerFuncionario;
 import model.Funcionario;
 import persistance.MapeadorFuncionario;
 
-public class CadastroFuncionario extends JFrame {
+public class TelaGestaoFuncionario extends JFrame {
 
 	/**
 	 * 
@@ -40,7 +40,7 @@ public class CadastroFuncionario extends JFrame {
 	private JButton btnOk;
 	private JButton btnCancelar;
 
-	private static CadastroFuncionario instancia;
+	private static TelaGestaoFuncionario instancia;
 	private Integer estado; // 0 = estado inicial, 1 = cadastrando, 2 = alterando, 3 = consultando
 
 	/**
@@ -50,7 +50,7 @@ public class CadastroFuncionario extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CadastroFuncionario frame = new CadastroFuncionario();
+					TelaGestaoFuncionario frame = new TelaGestaoFuncionario();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,9 +59,9 @@ public class CadastroFuncionario extends JFrame {
 		});
 	}
 
-	public static CadastroFuncionario getInstancia() {
+	public static TelaGestaoFuncionario getInstancia() {
 		if (instancia == null) {
-			instancia = new CadastroFuncionario();
+			instancia = new TelaGestaoFuncionario();
 		}
 		return instancia;
 	}
@@ -71,11 +71,11 @@ public class CadastroFuncionario extends JFrame {
 	 * 
 	 * 
 	 */
-	public CadastroFuncionario() {
-		setTitle("Gest\u00E3o de Cadastros");
+	public TelaGestaoFuncionario() {
+		setTitle("Gestão de Funcionários");
 		this.estado = 0;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 463, 340);
+		setBounds(100, 100, 467, 335);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -87,7 +87,7 @@ public class CadastroFuncionario extends JFrame {
 
 		nomeFuncionario = new JTextField();
 		nomeFuncionario.setEnabled(false);
-		nomeFuncionario.setBounds(75, 74, 340, 20);
+		nomeFuncionario.setBounds(75, 74, 355, 20);
 		contentPane.add(nomeFuncionario);
 		nomeFuncionario.setColumns(10);
 
@@ -97,7 +97,7 @@ public class CadastroFuncionario extends JFrame {
 
 		emailFuncionario = new JTextField();
 		emailFuncionario.setEnabled(false);
-		emailFuncionario.setBounds(75, 105, 340, 20);
+		emailFuncionario.setBounds(75, 105, 355, 20);
 		contentPane.add(emailFuncionario);
 		emailFuncionario.setColumns(10);
 
@@ -117,12 +117,12 @@ public class CadastroFuncionario extends JFrame {
 		cpfFuncionario.setColumns(10);
 
 		JLabel lblNewLabel_1 = new JLabel("Data de Nascimento");
-		lblNewLabel_1.setBounds(216, 139, 131, 14);
+		lblNewLabel_1.setBounds(216, 139, 116, 14);
 		contentPane.add(lblNewLabel_1);
 
 		JDateChooser dateChooser = new JDateChooser("dd/MM/yyyy", "##/##/#####", '_');
 		dateChooser.setEnabled(false);
-		dateChooser.setBounds(316, 136, 99, 20);
+		dateChooser.setBounds(331, 136, 99, 20);
 		contentPane.add(dateChooser);
 
 		JCheckBox checkAdm = new JCheckBox("Administrador");
@@ -144,20 +144,35 @@ public class CadastroFuncionario extends JFrame {
 		textFSenha.setBounds(216, 170, 44, 14);
 		contentPane.add(textFSenha);
 
-		JLabel lblNewLabel = new JLabel("Cadastros de Funcion\u00E1rios");
+		JLabel lblNewLabel = new JLabel();
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel.setBounds(140, 21, 185, 30);
 		contentPane.add(lblNewLabel);
+		
+		if (estado == 1) {
+			lblNewLabel.setText("Cadastrando Funcion\u00E1rio");
+			this.repaint();
+		} else if (estado == 2) {
+			lblNewLabel.setText("Atualizando Funcion\u00E1rio");
+			this.repaint();
+		} else if (estado == 3) {
+			lblNewLabel.setText("Conusltando Funcion\u00E1rios ");
+			this.repaint();
+		} else {
+			lblNewLabel.setText("Funcion\u00E1rios");
+			this.repaint();
+		}
 
 		senhaFuncionario = new JPasswordField();
 		senhaFuncionario.setEnabled(false);
-		senhaFuncionario.setBounds(259, 167, 160, 20);
+		senhaFuncionario.setBounds(259, 167, 171, 20);
 		contentPane.add(senhaFuncionario);
 
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				
+				estado = 1;
 				nomeFuncionario.setText("");
 				nomeFuncionario.setEnabled(true);
 				emailFuncionario.setText("");
@@ -172,7 +187,7 @@ public class CadastroFuncionario extends JFrame {
 				dateChooser.setEnabled(true);
 				btnOk.setEnabled(true);
 				btnCancelar.setEnabled(true);
-				estado = 1;
+				
 
 			}
 		});
@@ -188,6 +203,7 @@ public class CadastroFuncionario extends JFrame {
 				Funcionario alterar = ControllerFuncionario.getInstancia().getFuncionarioByCpf(cpf);
 
 				if (alterar != null) {
+					estado = 2;
 					nomeFuncionario.setText(alterar.getNome());
 					nomeFuncionario.setEnabled(true);
 					emailFuncionario.setText(alterar.getEmail());
@@ -200,7 +216,7 @@ public class CadastroFuncionario extends JFrame {
 					senhaFuncionario.setEnabled(true);
 					btnOk.setEnabled(true);
 					btnCancelar.setEnabled(true);
-					estado = 2;
+					
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Verifique os dados digitados e tente novamente.", "Aviso",
@@ -219,6 +235,8 @@ public class CadastroFuncionario extends JFrame {
 				Funcionario consultar = ControllerFuncionario.getInstancia().getFuncionarioByCpf(cpf);
 
 				if (consultar != null) {
+					estado = 3;
+					
 					nomeFuncionario.setText(consultar.getNome());
 					nomeFuncionario.setEnabled(false);
 					emailFuncionario.setText(consultar.getEmail());
@@ -235,7 +253,7 @@ public class CadastroFuncionario extends JFrame {
 					btnOk.setEnabled(true);
 					btnCancelar.setEnabled(true);
 
-					estado = 3;
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "Funcionario não encontrado.", "Aviso",
 							JOptionPane.WARNING_MESSAGE);
