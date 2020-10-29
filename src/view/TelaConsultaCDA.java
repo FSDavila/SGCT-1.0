@@ -22,6 +22,8 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.CardLayout;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -44,9 +46,14 @@ public class TelaConsultaCDA extends JFrame {
 	private static TelaConsultaCDA instancia;
 
 	private JPanel contentPane;
+	
 	private JTextField textFieldID;
 	private JTextField textFieldCDA;
+	
 	private JTable tabelaResultados;
+	
+	private JRadioButton rdbtnPCDA = new JRadioButton("pCDA");
+	private JRadioButton rdbtnCDA = new JRadioButton("CDA");
 
 	/**
 	 * Launch the application.
@@ -97,44 +104,49 @@ public class TelaConsultaCDA extends JFrame {
 		btnNewButton.setBounds(281, 34, 121, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String nCDA = textFieldCDA.getText();
-				String id = textFieldID.getText();
-				if (!nCDA.equals("") && !id.equals("")) {
-					JOptionPane.showMessageDialog(null, "Favor usar apenas um criterio para pesquisa!");
-				} else if (!nCDA.equals("") && id.equals("")) {
-					try {
-						CDA procurada = MapeadorCDA.getInstancia().get(Integer.parseInt(nCDA));
-						tabelaResultados.setModel(new DefaultTableModel(
-								new Object[][] {
-										{ procurada.getNCDA(), procurada.getTipoImposto(), procurada.getValor() }, },
-								new String[] { "nCDA", "Tipo Imposto", "Valor" }));
-						JOptionPane.showMessageDialog(null, "Consulta efetuada.");
-					} catch (NullPointerException k) {
-						JOptionPane.showMessageDialog(null, "Informe um numero de CDA Existente.", "Aviso",
-								JOptionPane.WARNING_MESSAGE);
-					}
-
-				} else if (nCDA.equals("") && !id.equals("")) {
-					try {
-						ArrayList<CDA> cdas = MapeadorContribuinte.getInstancia().get(id).getCDAs();
-						String[][] dados = new String[3][cdas.size()];
-						for (CDA cda : cdas) {
-							for (int i = 0; i < cdas.size(); i++) {
-								dados[i][0] = Integer.toString(cda.getNCDA());
-								dados[i][1] = Integer.toString(cda.getTipoImposto().getCodImposto());
-								dados[i][2] = Double.toString(cda.getValor());
-							}
-						}
-						if (cdas != null) {
-							tabelaResultados.setModel(new DefaultTableModel(dados, // tabela com as cdas
+				if (rdbtnCDA.isSelected()) {
+					String nCDA = textFieldCDA.getText();
+					String id = textFieldID.getText();
+					if (!nCDA.equals("") && !id.equals("")) {
+						JOptionPane.showMessageDialog(null, "Favor usar apenas um criterio para pesquisa!");
+					} else if (!nCDA.equals("") && id.equals("")) {
+						try {
+							CDA procurada = MapeadorCDA.getInstancia().get(Integer.parseInt(nCDA));
+							tabelaResultados.setModel(new DefaultTableModel(
+									new Object[][] { { procurada.getNCDA(), procurada.getTipoImposto(),
+											procurada.getValor() }, },
 									new String[] { "nCDA", "Tipo Imposto", "Valor" }));
 							JOptionPane.showMessageDialog(null, "Consulta efetuada.");
+						} catch (NullPointerException k) {
+							JOptionPane.showMessageDialog(null, "Informe um numero de CDA Existente.", "Aviso",
+									JOptionPane.WARNING_MESSAGE);
 						}
-					} catch (NullPointerException k) {
-						JOptionPane.showMessageDialog(null, "Informe um numero de CPF / CNPJ Valido.", "Aviso",
-								JOptionPane.WARNING_MESSAGE);
-					}
 
+					} else if (nCDA.equals("") && !id.equals("")) {
+						try {
+							ArrayList<CDA> cdas = MapeadorContribuinte.getInstancia().get(id).getCDAs();
+							String[][] dados = new String[3][cdas.size()];
+							for (CDA cda : cdas) {
+								for (int i = 0; i < cdas.size(); i++) {
+									dados[i][0] = Integer.toString(cda.getNCDA());
+									dados[i][1] = Integer.toString(cda.getTipoImposto().getCodImposto());
+									dados[i][2] = Double.toString(cda.getValor());
+								}
+							}
+							if (cdas != null) {
+								tabelaResultados.setModel(new DefaultTableModel(dados, // tabela com as cdas
+										new String[] { "nCDA", "Tipo Imposto", "Valor" }));
+								JOptionPane.showMessageDialog(null, "Consulta efetuada.");
+							}
+						} catch (NullPointerException k) {
+							JOptionPane.showMessageDialog(null, "Informe um numero de CPF / CNPJ Valido.", "Aviso",
+									JOptionPane.WARNING_MESSAGE);
+						}
+
+					}
+				}
+				else { // pcda
+					
 				}
 			}
 		});
@@ -149,13 +161,15 @@ public class TelaConsultaCDA extends JFrame {
 		textFieldID.setColumns(10);
 		contentPane.add(textFieldID);
 
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("CDA");
-		rdbtnNewRadioButton_1.setBounds(277, 7, 68, 23);
-		contentPane.add(rdbtnNewRadioButton_1);
+		rdbtnCDA.setBounds(277, 7, 68, 23);
+		contentPane.add(rdbtnCDA);
 
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("pCDA");
-		rdbtnNewRadioButton.setBounds(347, 7, 68, 23);
-		contentPane.add(rdbtnNewRadioButton);
+		rdbtnPCDA.setBounds(347, 7, 68, 23);
+		contentPane.add(rdbtnPCDA);
+		
+		ButtonGroup btnGrupoTitulo = new ButtonGroup();
+		btnGrupoTitulo.add(rdbtnCDA);
+		btnGrupoTitulo.add(rdbtnPCDA);
 
 		tabelaResultados = new JTable();
 		tabelaResultados.setEnabled(false);
