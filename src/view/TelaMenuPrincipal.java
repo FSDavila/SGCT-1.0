@@ -112,6 +112,12 @@ public class TelaMenuPrincipal extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_3 = new JButton("Emiss\u00E3o de Boletos");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaEmissaoBoleto.getInstancia().setVisible(true);
+				setVisible(false);
+			}
+		});
 		btnNewButton_3.setBounds(21, 198, 189, 23);
 		contentPane.add(btnNewButton_3);
 		
@@ -124,6 +130,12 @@ public class TelaMenuPrincipal extends JFrame {
 		contentPane.add(btnNewButton_7);
 		
 		JButton btnNewButton_8 = new JButton("Parcelamento de CDAs");
+		btnNewButton_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaParcelamento.getInstancia().setVisible(true);
+				setVisible(false);
+			}
+		});
 		btnNewButton_8.setBounds(21, 300, 189, 23);
 		contentPane.add(btnNewButton_8);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

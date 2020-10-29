@@ -47,8 +47,9 @@ public class PCDA {
 			}
 
 			if (mes == 2 && dia > 28) {
-				dia = 28; // pega a questao de feveireiro que tem menos de 30 dias, ajusta a data pro
+				dia = 28; // pega a questao de fevereiro que tem menos de 30 dias, ajusta a data pro
 							// ultimo dia de fev
+				calendar.set(ano, mes + i, dia);
 			}
 
 			Date dataVencimentoParcelaAtual = calendar.getTime();
@@ -126,11 +127,11 @@ public class PCDA {
 		this.parcelas = parcelas;
 	}
 
-	public CDA[] getCDASParceladas() {
+	public ArrayList<CDA> getCDASParceladas() {
 		return CDASParceladas;
 	}
 
-	public void setCDASParceladas(CDA[] cDASParceladas) {
+	public void setCDASParceladas(ArrayList<CDA> cDASParceladas) {
 		CDASParceladas = cDASParceladas;
 	}
 

@@ -58,6 +58,13 @@ public class ControllerPagamento {
 		procurada.setSituacaoCDA(2); // seta como quitada
 	}
 	
+	public void anexaPagamentoParcela(PagamentoParcela pagamento) {
+		PCDA procurada = MapeadorPCDA.getInstancia().get(pagamento.getIdentificacaoPCDA()); //pega o parcelamento
+		Parcela[] parcelas = procurada.getParcelas(); // pega o array de parcelas
+		parcelas[ pagamento.getnParcela() -1 ].setPagamento(pagamento); // pega a parcela em si, -1 pois eh a posicao no array, que comeca em 0
+		parcelas[ pagamento.getnParcela() -1 ].setQuitado(true); // seta como quitada
+	}
+	
     public void excluiPgtoIntegral(Long idPagamento) { //existe apenas para corrigir dados de forma interna, se necessario
     	PagamentoIntegral pgto = MapeadorPagamentoIntegral.getInstancia().get(idPagamento);
     	CDA procurada = MapeadorCDA.getInstancia().get(pgto.getnCDA());
@@ -72,13 +79,6 @@ public class ControllerPagamento {
     	parcelas[ pgto.getnParcela() -1 ].setPagamento(null); // destroi a associacao entre a parcela e o pagamento a ser removido
     	MapeadorPagamentoParcela.getInstancia().remove(idPagamento); // finalmente, remove o pgto da persistencia
     }
-	
-	public void anexaPagamentoParcela(PagamentoParcela pagamento) {
-		PCDA procurada = MapeadorPCDA.getInstancia().get(pagamento.getIdentificacaoPCDA()); //pega o parcelamento
-		Parcela[] parcelas = procurada.getParcelas(); // pega o array de parcelas
-		parcelas[ pagamento.getnParcela() -1 ].setPagamento(pagamento); // pega a parcela em si, -1 pois eh a posicao no array, que comeca em 0
-		parcelas[ pagamento.getnParcela() -1 ].setQuitado(true); // seta como quitada
-	}
 	
 	public boolean verificaDataVencimento(Date dataVencimento) { // retorna true se o dia for o atual ou apos, e mes e ano iguais ao atual		
 		Calendar calendar = Calendar.getInstance();
