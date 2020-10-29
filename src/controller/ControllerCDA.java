@@ -8,6 +8,7 @@ import model.Imposto;
 import model.SITUACAO;
 import model.TIPOIMPOSTO;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -17,11 +18,6 @@ public class ControllerCDA {
     private static ControllerCDA instancia; //singleton
 
     public ControllerCDA() {
-//        if (this.funcionarios == null) {
-//            Funcionario admin = new Funcionario(1,"Admin",1999,12,31,99999999,3);//apenas para inicializar
-//            this.funcionarios = new ArrayList<>();
-//            this.funcionarios.add(admin);
-//        }
 
     }
 
@@ -51,14 +47,19 @@ public class ControllerCDA {
         return true;
     }
     
-    public CDA cadastraCDA(int nCDA, double valor, int tipoImposto, Date dataVencimento, String descricao,
+	public CDA cadastraCDA(int nCDA, double valor, int tipoImposto, Date dataVencimento, String descricao,
 			Contribuinte titular, int situacaoCDA) {
-            CDA nova = new CDA(nCDA, valor, tipoImposto, dataVencimento, descricao, titular, situacaoCDA);
-            MapeadorCDA.getInstancia().put(nova);
-            titular.getCDAs().add(nova); //adiciona a CDA no arraylist de dividas do devedor
-            return nova;
-    }
-    
+		CDA nova = new CDA(nCDA, valor, tipoImposto, dataVencimento, descricao, titular, situacaoCDA);
+		MapeadorCDA.getInstancia().put(nova);
+		titular.getCDAs().add(nova); // adiciona a CDA no arraylist de dividas do devedor
+		try {
+			MapeadorCDA.getInstancia().persist();
+		} catch (FileNotFoundException ex) {
+			System.out.println("Houve um problema ao inicializar o arquivo de serializacao. Favor cadastrar novamente");
+		}
+		return nova;
+	}
+
     public double defineValorITCMD(TIPOIMPOSTO imposto, double valor) {
     	if(imposto.equals(TIPOIMPOSTO.ITCMD)){
     		if(valor < 100000.0){
@@ -83,7 +84,7 @@ public class ControllerCDA {
         procurada.setSituacaoCDA(situacao);
     }
 
-    public ArrayList<CDA> listaFuncionarios() {
+    public ArrayList<CDA> listaCDAS() {
         return MapeadorCDA.getInstancia().getList();
     }
 

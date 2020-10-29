@@ -14,6 +14,7 @@ public class CDA implements Serializable{
 	private String descricao;
 	private Contribuinte titular;
 	private SITUACAO situacaoCDA;
+	private PagamentoIntegral pagamento;
 	private ArrayList<CDA> dividas = new ArrayList<>();
 	
 	public CDA(int nCDA, double valor, int tipoImposto, Date dataVencimento, String descricao,
@@ -113,5 +114,11 @@ public class CDA implements Serializable{
 		this.dividas = dividas;
 	}
 	
-	
+	public PagamentoIntegral getPagamento() {
+		return pagamento;
+	}
+
+	public void setPagamento(PagamentoIntegral pagamento) {
+		this.pagamento = pagamento;
+	}
 }
