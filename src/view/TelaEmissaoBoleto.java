@@ -26,6 +26,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
 public class TelaEmissaoBoleto extends JFrame {
+	
+	private static TelaEmissaoBoleto instancia;
 
 	private JPanel contentPane;
 	private JTextField textFieldIdentificacao;
@@ -62,6 +64,13 @@ public class TelaEmissaoBoleto extends JFrame {
 				}
 			}
 		});
+	}
+	
+	public static TelaEmissaoBoleto getInstancia() {
+		if (instancia == null) {
+			instancia = new TelaEmissaoBoleto();
+		}
+		return instancia;
 	}
 
 	/**

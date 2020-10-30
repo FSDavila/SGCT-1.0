@@ -11,6 +11,7 @@ public class Contribuinte extends Pessoa{
 	private Date dtCadastroChat;
 	private boolean ehCNPJ;
 	private ArrayList<CDA> CDAs = new ArrayList<>();
+	private ArrayList<PCDA> parcelamentos = new ArrayList<>();
 	
 	public ArrayList<CDA> getCDAs() {
 		return CDAs;
@@ -31,6 +32,14 @@ public class Contribuinte extends Pessoa{
 		this.email = email;
 		this.dtCadastroChat = dtCadastroChat;
 		this.ehCNPJ = ehCNPJ;
+	}
+
+	public ArrayList<PCDA> getParcelamentos() {
+		return parcelamentos;
+	}
+
+	public void setParcelamentos(ArrayList<PCDA> parcelamentos) {
+		this.parcelamentos = parcelamentos;
 	}
 
 	public String getIdentificacao() {
