@@ -104,21 +104,27 @@ public class TelaRelatorioPagamento extends JFrame {
 
 				ArrayList<PagamentoIntegral> pagamentosIntegral = null;
 				ArrayList<PagamentoParcela> pagamentosParcelado = null;
-				
+
 				if (dataInicial.equals(null) || dataFinal.equals(null)) {
 					JOptionPane.showMessageDialog(null, "Selecione Uma Data Inicial e uma Data Final.", "Aviso",
 							JOptionPane.WARNING_MESSAGE);
+				} else if (dataInicial.after(new Date(System.currentTimeMillis()))
+						|| dataFinal.after(new Date(System.currentTimeMillis()))) {
+					JOptionPane.showMessageDialog(null, "Não é possivel selecionar uma data posterior a data atual",
+							"Aviso", JOptionPane.WARNING_MESSAGE);
 				} else if (!rdbtnCDA.isSelected() && !rdbtnPCDA.isSelected()) {
 					JOptionPane.showMessageDialog(null, "Selecione um título para gerar o relatório", "Aviso",
 							JOptionPane.WARNING_MESSAGE);
 				} else {
 					if (rdbtnCDA.isSelected()) {
-						
+
 						for (PagamentoIntegral pagInt : ControllerPagamento.getInstancia().listPagamentoIntegral()) {
-							if (pagInt.getDataPagamento().equals(dataInicial) || pagInt.getDataPagamento().equals(dataFinal))
+							if (pagInt.getDataPagamento().equals(dataInicial)
+									|| pagInt.getDataPagamento().equals(dataFinal))
 								pagamentosIntegral.add(pagInt);
-							
-							if (pagInt.getDataPagamento().after(dataInicial) && pagInt.getDataPagamento().before(dataFinal))
+
+							if (pagInt.getDataPagamento().after(dataInicial)
+									&& pagInt.getDataPagamento().before(dataFinal))
 								pagamentosIntegral.add(pagInt);
 						}
 
@@ -142,17 +148,18 @@ public class TelaRelatorioPagamento extends JFrame {
 						}
 
 					} else if (rdbtnPCDA.isSelected()) {
-						
+
 						for (PagamentoParcela pagP : ControllerPagamento.getInstancia().listPagamentoParcela()) {
-							if (pagP.getDataPagamento().equals(dataInicial) || pagP.getDataPagamento().equals(dataFinal)) 
+							if (pagP.getDataPagamento().equals(dataInicial)
+									|| pagP.getDataPagamento().equals(dataFinal))
 								pagamentosParcelado.add(pagP);
-							
+
 							if (pagP.getDataPagamento().after(dataInicial) && pagP.getDataPagamento().before(dataFinal))
 								pagamentosParcelado.add(pagP);
 						}
-						
+
 						String dados[][] = new String[4][pagamentosParcelado.size()];
-						
+
 						for (PagamentoParcela pagP : pagamentosParcelado) {
 							for (int i = 0; i < pagamentosParcelado.size(); i++) {
 								dados[i][0] = Integer.toString(pagP.getIdentificacaoPCDA());
@@ -161,15 +168,14 @@ public class TelaRelatorioPagamento extends JFrame {
 								dados[i][3] = pagP.getDataPagamento().toString();
 							}
 						}
-						
+
 						if (pagamentosParcelado != null) {
-							tabelaRelatorio.setModel( new DefaultTableModel( dados , new String[] {
-									"Numero pCDA", "Numero Parcela", "Valor Parcela", "Data do Pagamento"
-							}));
-							
+							tabelaRelatorio.setModel(new DefaultTableModel(dados, new String[] { "Numero pCDA",
+									"Numero Parcela", "Valor Parcela", "Data do Pagamento" }));
+
 							JOptionPane.showMessageDialog(null, "Relatório Gerado");
 						}
-						
+
 					}
 
 				}
