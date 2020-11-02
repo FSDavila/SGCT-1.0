@@ -46,12 +46,12 @@ public class TelaConsultaCDA extends JFrame {
 	private static TelaConsultaCDA instancia;
 
 	private JPanel contentPane;
-	
+
 	private JTextField textFieldID;
 	private JTextField textFieldCDA;
-	
+
 	private JTable tabelaResultados;
-	
+
 	private JRadioButton rdbtnPCDA = new JRadioButton("pCDA");
 	private JRadioButton rdbtnCDA = new JRadioButton("CDA");
 
@@ -70,7 +70,6 @@ public class TelaConsultaCDA extends JFrame {
 			}
 		});
 	}
-	
 
 	/**
 	 * Create the frame.
@@ -144,9 +143,8 @@ public class TelaConsultaCDA extends JFrame {
 						}
 
 					}
-				}
-				else { // pcda
-					
+				} else { // pcda
+
 				}
 			}
 		});
@@ -166,7 +164,7 @@ public class TelaConsultaCDA extends JFrame {
 
 		rdbtnPCDA.setBounds(347, 7, 68, 23);
 		contentPane.add(rdbtnPCDA);
-		
+
 		ButtonGroup btnGrupoTitulo = new ButtonGroup();
 		btnGrupoTitulo.add(rdbtnCDA);
 		btnGrupoTitulo.add(rdbtnPCDA);

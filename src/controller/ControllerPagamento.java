@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -12,7 +13,6 @@ import br.com.caelum.stella.boleto.Pagador;
 import br.com.caelum.stella.boleto.bancos.BancoDoBrasil;
 import br.com.caelum.stella.boleto.transformer.GeradorDeBoleto;
 import model.CDA;
-import model.Contribuinte;
 import model.PCDA;
 import model.PagamentoIntegral;
 import model.PagamentoParcela;
@@ -188,4 +188,16 @@ public class ControllerPagamento {
         // Para gerar um array de bytes a partir de um PNG  
         //byte[] bPNG = gerador.geraPNG();
 	}
+	
+	public ArrayList<PagamentoIntegral> listPagamentoIntegral() {
+		return MapeadorPagamentoIntegral.getInstancia().getList();
+	}
+	
+	public ArrayList<PagamentoParcela> listPagamentoParcela() {
+		return MapeadorPagamentoParcela.getInstancia().getList();
+	}
+	
+	
+	
+	
 }

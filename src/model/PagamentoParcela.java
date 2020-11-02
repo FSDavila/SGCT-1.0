@@ -1,9 +1,10 @@
 package model;
 
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 
-public class PagamentoParcela {
+public class PagamentoParcela implements Comparable<PagamentoParcela>{
 	private int identificacaoPCDA; // para o sistema poder identificar em qual parcelamento / parcela anexar o pagamento quando alimentando com planilhas externas
 	private int nParcela;
 	private double valorParcela;
@@ -61,6 +62,16 @@ public class PagamentoParcela {
 
 	public void setIdPagamento(long idPagamento) {
 		this.idPagamento = idPagamento;
+	}
+
+	@Override
+	public int compareTo(PagamentoParcela pagP) {
+		if (this.getIdentificacaoPCDA() < pagP.getIdentificacaoPCDA()) {
+			return -1;
+		} else if (this.getIdentificacaoPCDA() > pagP.getIdentificacaoPCDA()) {
+			return +1;
+		}
+		return 0;
 	}
 
 }
