@@ -17,6 +17,24 @@ public enum TIPOIMPOSTO {
 	public int getCodImposto() {
 		return codImposto;
 	}
+	
+	public String getTipoAsString() {
+		switch(this.codImposto) {
+		case 1: 
+			return "ICMS";
+		case 2:
+			return "ICMSSIMPLES";
+		case 3:
+			return "ITCMD";
+		case 4:
+			return "FATMA";
+		case 5:
+			return "PMAMBIENTAL";
+		case 6:
+			return "TCE";
+		}
+		return null;
+	}
 
 	public void setCodImposto(int codImposto) {
 		this.codImposto = codImposto;

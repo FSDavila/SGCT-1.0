@@ -50,10 +50,9 @@ public class TelaConsultaCDA extends JFrame {
 	private JTextField textFieldID;
 	private JTextField textFieldCDA;
 	
-	private JTable tabelaResultados;
-	
 	private JRadioButton rdbtnPCDA = new JRadioButton("pCDA");
 	private JRadioButton rdbtnCDA = new JRadioButton("CDA");
+	private JTable tabelaResultados;
 
 	/**
 	 * Launch the application.
@@ -85,23 +84,23 @@ public class TelaConsultaCDA extends JFrame {
 
 	public TelaConsultaCDA() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 467, 501);
+		setBounds(100, 100, 411, 466);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JLabel labelCDA = new JLabel("CDA / pCDA:");
-		labelCDA.setBounds(47, 11, 84, 14);
+		labelCDA.setBounds(28, 14, 62, 14);
 		contentPane.add(labelCDA);
 
 		textFieldCDA = new JTextField();
-		textFieldCDA.setBounds(141, 8, 130, 20);
+		textFieldCDA.setBounds(95, 11, 86, 20);
 		textFieldCDA.setColumns(10);
 		contentPane.add(textFieldCDA);
 
 		JButton btnNewButton = new JButton("Consultar");
-		btnNewButton.setBounds(281, 34, 121, 23);
+		btnNewButton.setBounds(186, 10, 79, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (rdbtnCDA.isSelected()) {
@@ -125,17 +124,14 @@ public class TelaConsultaCDA extends JFrame {
 					} else if (nCDA.equals("") && !id.equals("")) {
 						try {
 							ArrayList<CDA> cdas = MapeadorContribuinte.getInstancia().get(id).getCDAs();
-							String[][] dados = new String[3][cdas.size()];
-							for (CDA cda : cdas) {
-								for (int i = 0; i < cdas.size(); i++) {
-									dados[i][0] = Integer.toString(cda.getNCDA());
-									dados[i][1] = Integer.toString(cda.getTipoImposto().getCodImposto());
-									dados[i][2] = Double.toString(cda.getValor());
-								}
+							String[][] dados = new String[cdas.size()][3];
+							for (int i = 0; i < cdas.size(); i++) {
+									dados[i][0] = Integer.toString(cdas.get(i).getNCDA());
+									dados[i][1] = cdas.get(i).getTipoImposto().getTipoAsString();
+									dados[i][2] = Double.toString(cdas.get(i).getValor());
 							}
 							if (cdas != null) {
-								tabelaResultados.setModel(new DefaultTableModel(dados, // tabela com as cdas
-										new String[] { "nCDA", "Tipo Imposto", "Valor" }));
+								tabelaResultados.setModel(new DefaultTableModel(dados, new String[] { "nCDA", "Tipo Imposto", "Valor" }));
 								JOptionPane.showMessageDialog(null, "Consulta efetuada.");
 							}
 						} catch (NullPointerException k) {
@@ -153,26 +149,25 @@ public class TelaConsultaCDA extends JFrame {
 		contentPane.add(btnNewButton);
 
 		JLabel LabelCPF = new JLabel("CPF / CNPJ: ");
-		LabelCPF.setBounds(47, 36, 84, 14);
+		LabelCPF.setBounds(29, 39, 61, 14);
 		contentPane.add(LabelCPF);
 
 		textFieldID = new JTextField();
-		textFieldID.setBounds(141, 35, 130, 20);
+		textFieldID.setBounds(95, 36, 86, 20);
 		textFieldID.setColumns(10);
 		contentPane.add(textFieldID);
-
-		rdbtnCDA.setBounds(277, 7, 68, 23);
+		rdbtnCDA.setBounds(271, 10, 47, 23);
 		contentPane.add(rdbtnCDA);
-
-		rdbtnPCDA.setBounds(347, 7, 68, 23);
+		rdbtnPCDA.setBounds(320, 10, 53, 23);
 		contentPane.add(rdbtnPCDA);
 		
 		ButtonGroup btnGrupoTitulo = new ButtonGroup();
 		btnGrupoTitulo.add(rdbtnCDA);
 		btnGrupoTitulo.add(rdbtnPCDA);
-
+		
 		tabelaResultados = new JTable();
-		tabelaResultados.setEnabled(false);
+		tabelaResultados.setBounds(28, 67, 313, 320);
+		tabelaResultados.setEnabled(true);
 		tabelaResultados.setRowSelectionAllowed(false);
 		tabelaResultados.setModel(new DefaultTableModel(
 				new Object[][] { { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
@@ -185,6 +180,9 @@ public class TelaConsultaCDA extends JFrame {
 		tabelaResultados.setBorder(UIManager.getBorder("ComboBox.border"));
 		// contentPane.add(tabelaResultados);
 		tabelaResultados.setVisible(true);
+		contentPane.add(tabelaResultados);
+
+
 
 	}
 }

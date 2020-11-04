@@ -1,4 +1,4 @@
-package view;
+	package view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -123,7 +123,7 @@ public class TelaCadCDAPrototipo extends JFrame {
 		textFieldTipo = new JTextField();
 		textFieldTipo.setEnabled(false);
 		textFieldTipo.setColumns(10);
-		textFieldTipo.setBounds(10, 156, 64, 20);
+		textFieldTipo.setBounds(10, 202, 64, 20);
 		panel.add(textFieldTipo);
 
 		btnConfirmar = new JButton("OK");
@@ -144,10 +144,7 @@ public class TelaCadCDAPrototipo extends JFrame {
 						CDA nova = ControllerCDA.getInstancia().cadastraCDA(nCDA, valor, codImposto, dataVencimento,
 								"test", devedor, codSituacao);
 
-						if (nova != null) {
-							try {
-								MapeadorCDA.getInstancia().persist();
-								devedor.getCDAs().add(nova); // adiciona nova CDA ao array de CDAs daquele contribuinte
+						if (nova != null) {					
 								JOptionPane.showMessageDialog(null, "CDA cadastrada com sucesso!", "Aviso",
 										JOptionPane.INFORMATION_MESSAGE);
 								textFieldNCDA.setEnabled(false);
@@ -169,11 +166,6 @@ public class TelaCadCDAPrototipo extends JFrame {
 								btnCadastrar.setEnabled(true);
 								btnAlterar.setEnabled(true);
 								btnConsultar.setEnabled(true);
-							} catch (FileNotFoundException ex) {
-								System.out.println(
-										"Houve um problema ao inicializar o arquivo de serializacao. Favor cadastrar novamente");
-							}
-
 						} else {
 							JOptionPane.showMessageDialog(null, "Verifique os dados digitados e tente novamente.",
 									"Aviso", JOptionPane.WARNING_MESSAGE);
@@ -251,7 +243,7 @@ public class TelaCadCDAPrototipo extends JFrame {
 		textFieldSituacao = new JTextField();
 		textFieldSituacao.setEnabled(false);
 		textFieldSituacao.setColumns(10);
-		textFieldSituacao.setBounds(10, 202, 64, 20);
+		textFieldSituacao.setBounds(10, 156, 64, 20);
 		panel.add(textFieldSituacao);
 		
 		JLabel lblSenha = new JLabel("Cod. Situa\u00E7\u00E3o");
@@ -350,9 +342,9 @@ public class TelaCadCDAPrototipo extends JFrame {
 				if(alterar != null){
 					textFieldNCDA.setText(Integer.toString(alterar.getNCDA()));
 					textFieldID.setText(alterar.getTitular().getIdentificacao());
-					textFieldTipo.setText(Integer.toString(alterar.getTipoImposto().getCodImposto()));
+					textFieldSituacao.setText(Integer.toString(alterar.getTipoImposto().getCodImposto()));
 					textFieldValor.setText(Double.toString(alterar.getValor()));
-					textFieldSituacao.setText(Integer.toString(alterar.getSituacaoCDA().getCodCDA()));
+					textFieldTipo.setText(Integer.toString(alterar.getSituacaoCDA().getCodCDA()));
 					textFieldDescricao.setText(alterar.getDescricao());
 					dateChooserDNF.setDate(alterar.getDataVencimento());
 					btnCancelar.setEnabled(true);

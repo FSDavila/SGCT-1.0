@@ -287,6 +287,7 @@ public class TelaCadContribuinte extends JFrame {
 				btnAlterar.setEnabled(false);
 				btnConsultar.setEnabled(false);
 				btnCancelar.setEnabled(true);
+				estado = 1;
 			}
 		});
 		btnCadastrar.setBounds(10, 187, 86, 23);
