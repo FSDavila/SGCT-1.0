@@ -144,24 +144,24 @@ public class TelaGestaoFuncionario extends JFrame {
 		textFSenha.setBounds(216, 170, 44, 14);
 		contentPane.add(textFSenha);
 
-		JLabel lblNewLabel = new JLabel();
+		JLabel lblNewLabel = new JLabel("Funcion\u00E1rios");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel.setBounds(140, 21, 185, 30);
 		contentPane.add(lblNewLabel);
 		
-		if (estado == 1) {
-			lblNewLabel.setText("Cadastrando Funcion\u00E1rio");
-			this.repaint();
-		} else if (estado == 2) {
-			lblNewLabel.setText("Atualizando Funcion\u00E1rio");
-			this.repaint();
-		} else if (estado == 3) {
-			lblNewLabel.setText("Conusltando Funcion\u00E1rios ");
-			this.repaint();
-		} else {
-			lblNewLabel.setText("Funcion\u00E1rios");
-			this.repaint();
-		}
+//		if (estado == 1) {
+//			lblNewLabel.setText("Cadastrando Funcion\u00E1rio");
+//			this.repaint();
+//		} else if (estado == 2) {
+//			lblNewLabel.setText("Atualizando Funcion\u00E1rio");
+//			this.repaint();
+//		} else if (estado == 3) {
+//			lblNewLabel.setText("Conusltando Funcion\u00E1rios ");
+//			this.repaint();
+//		} else {
+//			lblNewLabel.setText("Funcion\u00E1rios");
+//			this.repaint();
+//		}
 
 		senhaFuncionario = new JPasswordField();
 		senhaFuncionario.setEnabled(false);
