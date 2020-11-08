@@ -6,21 +6,26 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import model.CDA;
+import model.PCDA;
 
 import javax.swing.UIManager;
 import java.awt.GridLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.CardLayout;
+import java.awt.Color;
+
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 
@@ -30,6 +35,7 @@ import java.awt.Insets;
 import net.miginfocom.swing.MigLayout;
 import persistance.MapeadorCDA;
 import persistance.MapeadorContribuinte;
+import persistance.MapeadorPCDA;
 
 import java.awt.FlowLayout;
 import javax.swing.JButton;
@@ -84,23 +90,42 @@ public class TelaConsultaCDA extends JFrame {
 
 	public TelaConsultaCDA() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 411, 466);
+		setBounds(100, 100, 550, 496);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JLabel labelCDA = new JLabel("CDA / pCDA:");
-		labelCDA.setBounds(28, 14, 62, 14);
+		labelCDA.setBounds(10, 14, 80, 14);
 		contentPane.add(labelCDA);
 
 		textFieldCDA = new JTextField();
-		textFieldCDA.setBounds(95, 11, 86, 20);
+		textFieldCDA.setBounds(95, 11, 152, 20);
 		textFieldCDA.setColumns(10);
 		contentPane.add(textFieldCDA);
+		
+		JScrollPane scrollPaneTabela = new JScrollPane();
+		scrollPaneTabela.setBounds(10, 75, 514, 371);
+		scrollPaneTabela.setViewportBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+
+		tabelaResultados = new JTable();
+		tabelaResultados.setBounds(16, 323, 552, 194);
+		tabelaResultados.setModel(new DefaultTableModel(
+			new Object[][] {
+				{" - ", " - ", " - "},
+			},
+			new String[] {
+					 "nº Titulo", "Tipo Imposto", "Valor", "Status" 
+			}
+		));
+		
+		scrollPaneTabela.setViewportView(tabelaResultados);
+		contentPane.add(scrollPaneTabela);
+
 
 		JButton btnNewButton = new JButton("Consultar");
-		btnNewButton.setBounds(186, 10, 79, 23);
+		btnNewButton.setBounds(257, 35, 100, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (rdbtnCDA.isSelected()) {
@@ -113,8 +138,8 @@ public class TelaConsultaCDA extends JFrame {
 							CDA procurada = MapeadorCDA.getInstancia().get(Integer.parseInt(nCDA));
 							tabelaResultados.setModel(new DefaultTableModel(
 									new Object[][] { { procurada.getNCDA(), procurada.getTipoImposto(),
-											procurada.getValor() }, },
-									new String[] { "nCDA", "Tipo Imposto", "Valor" }));
+											procurada.getValor(), procurada.getSituacaoCDA() }, },
+									new String[] { "nº Titulo", "Tipo Imposto", "Valor", "Status"  }));
 							JOptionPane.showMessageDialog(null, "Consulta efetuada.");
 						} catch (NullPointerException k) {
 							JOptionPane.showMessageDialog(null, "Informe um numero de CDA Existente.", "Aviso",
@@ -129,9 +154,10 @@ public class TelaConsultaCDA extends JFrame {
 									dados[i][0] = Integer.toString(cdas.get(i).getNCDA());
 									dados[i][1] = cdas.get(i).getTipoImposto().getTipoAsString();
 									dados[i][2] = Double.toString(cdas.get(i).getValor());
+									dados[i][3] = cdas.get(i).getSituacaoCDA().toString();
 							}
 							if (cdas != null) {
-								tabelaResultados.setModel(new DefaultTableModel(dados, new String[] { "nCDA", "Tipo Imposto", "Valor" }));
+								tabelaResultados.setModel(new DefaultTableModel(dados, new String[] { "nº Titulo", "Tipo Imposto", "Valor", "Status"  }));
 								JOptionPane.showMessageDialog(null, "Consulta efetuada.");
 							}
 						} catch (NullPointerException k) {
@@ -141,47 +167,89 @@ public class TelaConsultaCDA extends JFrame {
 
 					}
 				}
-				else { // pcda
-					
+				if(rdbtnPCDA.isSelected()) { // pcda
+					String pCDA = textFieldCDA.getText();
+					String id = textFieldID.getText();
+					if (!pCDA.equals("") && !id.equals("")) {
+						JOptionPane.showMessageDialog(null, "Favor usar apenas um criterio para pesquisa!");
+					} else if (!pCDA.equals("") && id.equals("")) {
+						try {
+							PCDA procurada = MapeadorPCDA.getInstancia().get(Integer.parseInt(pCDA));
+							tabelaResultados.setModel(new DefaultTableModel(
+									new Object[][] { { Integer.toString(procurada.getIdentificacao()), procurada.getTipoImposto(),
+										Double.toString(procurada.getValor()), Integer.toString(procurada.getParcelas().length) }, },
+									new String[] { "nº Titulo", "Tipo Imposto", "Valor", "nº Parcelas"}));
+							JOptionPane.showMessageDialog(null, "Consulta efetuada.");
+						} catch (NullPointerException k) {
+							JOptionPane.showMessageDialog(null, "Informe um numero de CDA Existente.", "Aviso",
+									JOptionPane.WARNING_MESSAGE);
+						}
+
+					} else if (pCDA.equals("") && !id.equals("")) {
+						try {
+							ArrayList<PCDA> parcelamentos = MapeadorContribuinte.getInstancia().get(id).getParcelamentos();
+							String[][] dados = new String[parcelamentos.size()][4];
+							for (int i = 0; i < parcelamentos.size(); i++) {
+									dados[i][0] = Integer.toString(parcelamentos.get(i).getIdentificacao());
+									dados[i][1] = parcelamentos.get(i).getTipoImposto().getTipoAsString();
+									dados[i][2] = Double.toString(parcelamentos.get(i).getValor());
+									dados[i][3] = Integer.toString(parcelamentos.get(i).getParcelas().length);
+							}
+							if (parcelamentos != null) {
+								tabelaResultados.setModel(new DefaultTableModel(dados, new String[] { "nº Titulo", "Tipo Imposto", "Valor", "nº Parcelas" }));
+								JOptionPane.showMessageDialog(null, "Consulta efetuada.");
+							}
+						} catch (NullPointerException k) {
+							JOptionPane.showMessageDialog(null, "Informe um numero de CPF / CNPJ Valido.", "Aviso",
+									JOptionPane.WARNING_MESSAGE);
+						}
+
+					}
 				}
 			}
 		});
 		contentPane.add(btnNewButton);
 
 		JLabel LabelCPF = new JLabel("CPF / CNPJ: ");
-		LabelCPF.setBounds(29, 39, 61, 14);
+		LabelCPF.setBounds(10, 39, 80, 14);
 		contentPane.add(LabelCPF);
 
 		textFieldID = new JTextField();
-		textFieldID.setBounds(95, 36, 86, 20);
+		textFieldID.setBounds(95, 36, 152, 20);
 		textFieldID.setColumns(10);
 		contentPane.add(textFieldID);
-		rdbtnCDA.setBounds(271, 10, 47, 23);
+		rdbtnCDA.setBounds(253, 10, 62, 23);
 		contentPane.add(rdbtnCDA);
-		rdbtnPCDA.setBounds(320, 10, 53, 23);
+		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.setBounds(444, 16, 80, 23);
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+				textFieldID.setText("");
+				textFieldCDA.setText("");	
+				rdbtnPCDA.setSelected(false);
+				rdbtnCDA.setSelected(false);
+				tabelaResultados.setModel(new DefaultTableModel(
+						new Object[][] {
+							{" - ", " - ", " - "},
+						},
+						new String[] {
+								 "nº Titulo", "Tipo Imposto", "Valor" 
+						}
+					));	
+				TelaMenuPrincipal.getInstancia().setVisible(true);
+			}
+		});
+		contentPane.add(btnVoltar);
+		rdbtnPCDA.setBounds(317, 10, 66, 23);
 		contentPane.add(rdbtnPCDA);
 		
 		ButtonGroup btnGrupoTitulo = new ButtonGroup();
 		btnGrupoTitulo.add(rdbtnCDA);
 		btnGrupoTitulo.add(rdbtnPCDA);
 		
-		tabelaResultados = new JTable();
-		tabelaResultados.setBounds(28, 67, 313, 320);
-		tabelaResultados.setEnabled(true);
-		tabelaResultados.setRowSelectionAllowed(false);
-		tabelaResultados.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
-						{ null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
-						{ null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
-						{ null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
-						{ null, null, null }, { null, null, null }, { null, null, null }, { null, null, null }, },
-				new String[] { "CDA / pCDA", "Tipo Imposto", "Valor" }));
-		// tabelaResultados.getModel().
-		tabelaResultados.setBorder(UIManager.getBorder("ComboBox.border"));
-		// contentPane.add(tabelaResultados);
-		tabelaResultados.setVisible(true);
-		contentPane.add(tabelaResultados);
-
+		
 
 
 	}

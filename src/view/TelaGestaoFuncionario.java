@@ -255,7 +255,7 @@ public class TelaGestaoFuncionario extends JFrame {
 
 					
 				} else {
-					JOptionPane.showMessageDialog(null, "Funcionario não encontrado.", "Aviso",
+					JOptionPane.showMessageDialog(null, "Funcionario nao encontrado.", "Aviso",
 							JOptionPane.WARNING_MESSAGE);
 				}
 			}
@@ -267,6 +267,7 @@ public class TelaGestaoFuncionario extends JFrame {
 		btnOk.setEnabled(false);
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				System.out.println(estado);
 				String cpf = cpfFuncionario.getText().replaceAll(".", "").replaceAll("-", "");
 				System.out.println(cpf);
 				String cpfWarning = "";
@@ -299,9 +300,9 @@ public class TelaGestaoFuncionario extends JFrame {
 					} else if (!validacaoLogin || !validacaoCpf) {
 
 						if (!validacaoLogin)
-							loginWarning = "Login inv�lido. Insira outro.";
+							loginWarning = "Login invalido. Insira outro.";
 						if (!validacaoCpf)
-							cpfWarning = "CPF Inv�lido";
+							cpfWarning = "CPF Invalido";
 
 						JOptionPane.showMessageDialog(null, loginWarning + "\n" + cpfWarning, "Aviso",
 								JOptionPane.INFORMATION_MESSAGE);
@@ -364,7 +365,7 @@ public class TelaGestaoFuncionario extends JFrame {
 							e.printStackTrace();
 						}
 
-						JOptionPane.showMessageDialog(null, "Funcionário Atualizado com sucesso", "Aviso",
+						JOptionPane.showMessageDialog(null, "Funcionario Atualizado com sucesso", "Aviso",
 								JOptionPane.INFORMATION_MESSAGE);
 
 						nomeFuncionario.setText("");

@@ -122,6 +122,12 @@ public class TelaMenuPrincipal extends JFrame {
 		contentPane.add(btnNewButton_3);
 		
 		JButton btnNewButton_6 = new JButton("Relat\u00F3rio de Pagamentos");
+		btnNewButton_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaRelatorioPagamento.getInstancia().setVisible(true);
+				setVisible(false);
+			}
+		});
 		btnNewButton_6.setBounds(21, 232, 189, 23);
 		contentPane.add(btnNewButton_6);
 		

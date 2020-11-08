@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Parcela {
+public class Parcela implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private int nParcela;
 	private double valorParcela;
 	private Date dataVencimento;
@@ -15,6 +17,7 @@ public class Parcela {
 		this.nParcela = nParcela;
 		this.valorParcela = valorParcela;
 		this.quitado = quitado;
+		this.dataVencimento = dataVencimento;
 	}
 	
 	public int getnParcela() {

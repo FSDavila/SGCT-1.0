@@ -8,6 +8,7 @@ import model.CDA;
 import model.Contribuinte;
 import model.PCDA;
 import model.Parcela;
+import model.SITUACAO;
 import model.TIPOIMPOSTO;
 import persistance.MapeadorCDA;
 import persistance.MapeadorContribuinte;
@@ -39,23 +40,47 @@ public class ControllerPCDA {
 	
 	public PCDA geraParcelamento(int nParcelas, Contribuinte titular, int identificacao, int tipoImposto,
 			ArrayList<CDA> CDASParceladas, Date dataVencimento) {
-		if (titular.getParcelamentos().size() < 3) { // condicao eh existir menos de 3 parcelamentos para possibilidade
+		if (titular.getParcelamentos().size() < 10) { // condicao eh existir menos de 3 parcelamentos para possibilidade
 														// de emissao de um novo
-			double valor = pegaValorTotal(CDASParceladas);
-			for (CDA parcelada : CDASParceladas) {
-				parcelada.setSituacaoCDA(4); // seta todas as cdas parceladas para status parcelada
-			}
-			PCDA novo = new PCDA(nParcelas, titular, identificacao, valor, tipoImposto, false, CDASParceladas,
-					dataVencimento);
-			MapeadorPCDA.getInstancia().put(novo);
-			titular.getParcelamentos().add(novo); // adiciona o parcelamento na lista de parcelamentos do contribuinte
 			try {
+
+			double valor = pegaValorTotal(CDASParceladas);
+			PCDA novo = new PCDA(nParcelas, titular, identificacao, valor, tipoImposto, CDASParceladas);
+			MapeadorPCDA.getInstancia().put(novo);
+			MapeadorContribuinte.getInstancia().get(titular.getIdentificacao()).getParcelamentos().add(novo);
+			MapeadorPCDA.getInstancia().persist();
+			// adiciona o parcelamento na lista de parcelamentos do contribuinte
+			for (CDA parcelada : CDASParceladas) {
+				try {
+				System.out.println(titular.getCDAs().size());
+				System.out.println(parcelada.getNCDA());
+				parcelada.setSituacao(SITUACAO.PARCELADO); // seta todas as cdas parceladas para status parcelada
+				System.out.println(titular.getCDAs().size());
+				System.out.println(parcelada.getSituacaoCDA());
+				System.out.println(parcelada.getTipoImposto());
 				MapeadorCDA.getInstancia().persist();
-			} catch (FileNotFoundException ex) {
+				MapeadorContribuinte.getInstancia().persist();
+				} catch(FileNotFoundException ex) {
+					System.out.println(
+							"Houve um problema ao inicializar o arquivo de serializacao. Favor cadastrar novamente");
+				}	
+			}
+			for(CDA cda : titular.getCDAs()) {
+				for(int i = 0; i < CDASParceladas.size(); i++) {
+				if(cda.getNCDA() == CDASParceladas.get(i).getNCDA()) {
+					titular.getCDAs().remove(cda);
+				}
+			}
+			MapeadorContribuinte.getInstancia().persist();
+			System.out.println(novo.getCDASParceladas().size());
+			System.out.println(novo.getTitular().getNome());
+			System.out.println(novo.getTitular().getParcelamentos().size());
+			return novo;
+			} }catch (FileNotFoundException ex) {
 				System.out.println(
 						"Houve um problema ao inicializar o arquivo de serializacao. Favor cadastrar novamente");
 			}
-			return novo;
+			
 		}
 		return null; // ja existem mais de 3 parcelamentos para esse contribuinte
 	}

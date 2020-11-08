@@ -105,6 +105,10 @@ public class CDA implements Serializable{
 		}
 
 	}
+	
+	public void setSituacao(SITUACAO situacao) {
+		this.situacaoCDA = situacao;
+	}
 
 	public ArrayList<CDA> getDividas() {
 		return dividas;

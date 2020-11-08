@@ -1,11 +1,13 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,6 +23,7 @@ import model.PagamentoParcela;
 
 import javax.swing.JTable;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -32,6 +35,8 @@ public class TelaRelatorioPagamento extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tabelaRelatorio;
+	
+	private static TelaRelatorioPagamento instancia;
 
 	/**
 	 * Launch the application.
@@ -48,13 +53,21 @@ public class TelaRelatorioPagamento extends JFrame {
 			}
 		});
 	}
+	
+    public static TelaRelatorioPagamento getInstancia() {
+        if (instancia == null) {
+            instancia = new TelaRelatorioPagamento();
+        }
+        return instancia;
+    }
+
 
 	/**
 	 * Create the frame.
 	 */
 	public TelaRelatorioPagamento() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 377, 348);
+		setBounds(100, 100, 475, 406);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -88,13 +101,24 @@ public class TelaRelatorioPagamento extends JFrame {
 		dateFim.setBounds(32, 95, 110, 20);
 		contentPane.add(dateFim);
 
+		JScrollPane scrollPaneTabela = new JScrollPane();
+		scrollPaneTabela.setBounds(10, 141, 439, 215);
+		scrollPaneTabela.setViewportBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		
 		tabelaRelatorio = new JTable();
-		tabelaRelatorio.setBounds(32, 126, 293, 159);
-		contentPane.add(tabelaRelatorio);
-
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(308, 126, 17, 159);
-		contentPane.add(scrollBar);
+		tabelaRelatorio.setBounds(32, 71, 110, 20);
+		
+		tabelaRelatorio.setModel(new DefaultTableModel(
+				new Object[][] {
+					{" - ", " - ", " - "},
+				},
+				new String[] {
+						"nCDA", "Valor Pago", "Data do Pagamento" 
+				}
+			));
+		
+		scrollPaneTabela.setViewportView(tabelaRelatorio);
+		contentPane.add(scrollPaneTabela);
 
 		JButton btnGerar = new JButton("Gerar Relat\u00F3rio\r\n");
 		btnGerar.addActionListener(new ActionListener() {

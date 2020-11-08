@@ -1,10 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 
-public class PagamentoParcela implements Comparable<PagamentoParcela>{
+public class PagamentoParcela implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private int identificacaoPCDA; // para o sistema poder identificar em qual parcelamento / parcela anexar o pagamento quando alimentando com planilhas externas
 	private int nParcela;
 	private double valorParcela;
@@ -26,7 +29,7 @@ public class PagamentoParcela implements Comparable<PagamentoParcela>{
 		
 		String idPagStr = Integer.toString(identificacaoPCDA) + "0" + Integer.toString(nParcela) + Integer.toString(dia) + Integer.toString(mes);
 			
-		this.idPagamento = Integer.parseInt(idPagStr);
+		this.idPagamento = Long.parseLong(idPagStr);
 	}
 	
 	public int getIdentificacaoPCDA() {
@@ -63,15 +66,4 @@ public class PagamentoParcela implements Comparable<PagamentoParcela>{
 	public void setIdPagamento(long idPagamento) {
 		this.idPagamento = idPagamento;
 	}
-
-	@Override
-	public int compareTo(PagamentoParcela pagP) {
-		if (this.getIdentificacaoPCDA() < pagP.getIdentificacaoPCDA()) {
-			return -1;
-		} else if (this.getIdentificacaoPCDA() > pagP.getIdentificacaoPCDA()) {
-			return +1;
-		}
-		return 0;
-	}
-
 }

@@ -1,37 +1,44 @@
 package model;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class PCDA {
-	private int identificacao;
+public class PCDA implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	private int identificacao; //id da PCDA 
 	private Contribuinte titular;
+
+
 	private double valor;
 	private TIPOIMPOSTO tipoImposto;
-	private boolean quitado;
+	private boolean quitado = false;
 	private Parcela[] parcelas;
 	private ArrayList<CDA> CDASParceladas;
 
-	public PCDA(int nParcelas, Contribuinte titular, int identificacao, double valor, int tipoImposto, boolean quitado, ArrayList<CDA> CDASParceladas,
-			Date dataVencimento) {
-		super();
+	public PCDA(int nParcelas, Contribuinte titular, int identificacao, double valor, int tipoImposto, ArrayList<CDA> CDASParceladas) {
 		this.titular = titular;
 		this.identificacao = identificacao;
 		this.valor = valor;
+		quitado = false;
 		setTipoImposto(tipoImposto);
-		this.quitado = quitado;
 		this.parcelas = new Parcela[nParcelas];
 		this.CDASParceladas = CDASParceladas;
 
 		// abaixo acontece o processo para criacao das parcelas
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(dataVencimento);
+		calendar.setTime(new Date());
+		calendar.add(Calendar.DAY_OF_MONTH, +5);
 
 		double valorParcela = valor / nParcelas;
-		for (int i = 0; i < nParcelas; i++) { // gera as parcelas no array
-
-			int dia = calendar.get(Calendar.DAY_OF_MONTH);
+		parcelas[0] = new Parcela(1, valorParcela, calendar.getTime(), false);
+		for (int i = 1; i < nParcelas; i++) { // gera as parcelas no array
+			calendar.add(Calendar.MONTH, +1);
+			System.out.println(calendar.getTime());
+			/* int dia = calendar.get(Calendar.DAY_OF_MONTH);
 			
 			if(dia > 30) { // nao pode emitir com data pro dia 31, entao automaticamente eh ajustado isso aqui
 				dia = 30;
@@ -61,11 +68,22 @@ public class PCDA {
 				Calendar original = Calendar.getInstance();
 				original.setTime(dataVencimento);
 				int diaOriginal = calendar.get(Calendar.DAY_OF_MONTH); // p corrigir dia pras proximas iter. no caso de
-																		// ter feveireiro na iteracao atual
-				calendar.set(ano, mes, diaOriginal);
-
-			}
+				*/														// ter feveireiro na iteracao atual
+				parcelas[i] = new Parcela(i +1, valorParcela, calendar.getTime(), false);
+ 
 		}
+	}
+	
+	public Contribuinte getTitular() {
+		return titular;
+	}
+
+	public void setTitular(Contribuinte titular) {
+		this.titular = titular;
+	}
+
+	public void setTipoImposto(TIPOIMPOSTO tipoImposto) {
+		this.tipoImposto = tipoImposto;
 	}
 
 	public int getIdentificacao() {

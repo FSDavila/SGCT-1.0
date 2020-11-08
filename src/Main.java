@@ -1,3 +1,5 @@
+import java.util.Date;
+
 import javax.swing.JFrame;
 
 import br.com.caelum.stella.boleto.Banco;
@@ -8,6 +10,9 @@ import br.com.caelum.stella.boleto.Endereco;
 import br.com.caelum.stella.boleto.Pagador;
 import br.com.caelum.stella.boleto.bancos.BancoDoBrasil;
 import br.com.caelum.stella.boleto.transformer.GeradorDeBoleto;
+import controller.ControllerPagamento;
+import model.PagamentoIntegral;
+import model.PagamentoParcela;
 import view.TelaLogin;
 
 /*

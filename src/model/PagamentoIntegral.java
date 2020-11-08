@@ -1,9 +1,12 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-public class PagamentoIntegral implements Comparable<PagamentoIntegral> {
+public class PagamentoIntegral implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private int nCDA;
 	private double valorPgto;
 	private Date dataPagamento;
@@ -60,14 +63,4 @@ public class PagamentoIntegral implements Comparable<PagamentoIntegral> {
 		this.idPagamento = idPagamento;
 	}
 
-	@Override
-	public int compareTo(PagamentoIntegral pagI) {
-		if (this.getDataPagamento().before(pagI.getDataPagamento())) {
-			return -1;
-		} else if (this.getDataPagamento().after(pagI.getDataPagamento())) {
-			return +1;
-		} else {
-			return 0;
-		}
-	}
 }
