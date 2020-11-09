@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.4" icons="false" generate-combined-fragments="true">  
+  <object id="1" language="java" name="view.TelaParcelamento" project="SGCT 1.0" 
+    file="/SGCT 1.0/src/view/TelaParcelamento.java" binary="false" label="telaParcelamento" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="2">      
+      <position height="1119" width="110" x="5" y="108"/>    
+    </execution>  
+  </object>  
+  <object id="5" language="java" name="view.TelaParcelamento" project="SGCT 1.0" 
+    file="/SGCT 1.0/src/view/TelaParcelamento.java" binary="false" label="telaParcelamento1" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="4">      
+      <position height="1077" width="110" x="119" y="129"/>    
+    </execution>  
+  </object>  
+  <object id="54" language="java" name="javax.swing.text.JTextComponent" project="SGCT 1.0" 
+    file="C:/Users/Tati/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_14.0.2.v20200815-0932/jre/lib/jrt-fs.jar" 
+    binary="true" label="textFieldParcelas" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="7">      
+      <position height="21" width="0" x="0" y="150"/>    
+    </execution>    
+    <execution id="23">      
+      <position height="21" width="0" x="0" y="486"/>    
+    </execution>  
+  </object>  
+  <object id="55" language="java" name="java.util.Calendar" project="SGCT 1.0" 
+    file="C:/Users/Tati/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_14.0.2.v20200815-0932/jre/lib/jrt-fs.jar" 
+    binary="true" label="&lt;static&gt;" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="9">      
+      <position height="21" width="0" x="0" y="192"/>    
+    </execution>  
+  </object>  
+  <object id="56" language="java" name="java.util.Calendar" project="SGCT 1.0" 
+    file="C:/Users/Tati/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_14.0.2.v20200815-0932/jre/lib/jrt-fs.jar" 
+    binary="true" label="calendar" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="11">      
+      <position height="21" width="0" x="0" y="234"/>    
+    </execution>    
+    <execution id="15">      
+      <position height="21" width="0" x="0" y="318"/>    
+    </execution>    
+    <execution id="17">      
+      <position height="21" width="0" x="0" y="360"/>    
+    </execution>    
+    <execution id="19">      
+      <position height="21" width="0" x="0" y="402"/>    
+    </execution>    
+    <execution id="31">      
+      <position height="21" width="0" x="0" y="654"/>    
+    </execution>    
+    <execution id="51">      
+      <position height="21" width="0" x="0" y="1122"/>    
+    </execution>  
+  </object>  
+  <object id="57" language="java" name="java.util.Date" project="SGCT 1.0" 
+    file="C:/Users/Tati/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_14.0.2.v20200815-0932/jre/lib/jrt-fs.jar" 
+    binary="true" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="13">      
+      <position height="21" width="0" x="0" y="276"/>    
+    </execution>  
+  </object>  
+  <object id="58" language="java" name="controller.ControllerPCDA" project="SGCT 1.0" 
+    file="/SGCT 1.0/src/controller/ControllerPCDA.java" binary="false" label="&lt;static&gt;" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="21">      
+      <position height="21" width="0" x="0" y="444"/>    
+    </execution>  
+  </object>  
+  <object id="59" language="java" name="persistance.MapeadorContribuinte" project="SGCT 1.0" 
+    file="/SGCT 1.0/src/persistance/MapeadorContribuinte.java" binary="false" label="&lt;static&gt;" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="25">      
+      <position height="21" width="0" x="0" y="528"/>    
+    </execution>    
+    <execution id="39">      
+      <position height="21" width="0" x="0" y="822"/>    
+    </execution>  
+  </object>  
+  <object id="60" language="java" name="javax.swing.text.JTextComponent" project="SGCT 1.0" 
+    file="C:/Users/Tati/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_14.0.2.v20200815-0932/jre/lib/jrt-fs.jar" 
+    binary="true" label="textFieldIdentificacao" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="27">      
+      <position height="21" width="0" x="0" y="570"/>    
+    </execution>  
+  </object>  
+  <object id="61" language="java" name="persistance.MapeadorContribuinte" project="SGCT 1.0" 
+    file="/SGCT 1.0/src/persistance/MapeadorContribuinte.java" binary="false" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="29">      
+      <position height="21" width="0" x="0" y="612"/>    
+    </execution>  
+  </object>  
+  <object id="62" language="java" name="controller.ControllerPCDA" project="SGCT 1.0" 
+    file="/SGCT 1.0/src/controller/ControllerPCDA.java" binary="false" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="33">      
+      <position height="21" width="0" x="0" y="696"/>    
+    </execution>  
+  </object>  
+  <object id="63" language="java" name="persistance.MapeadorCDA" project="SGCT 1.0" 
+    file="/SGCT 1.0/src/persistance/MapeadorCDA.java" binary="false" label="&lt;static&gt;" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="35">      
+      <position height="21" width="0" x="0" y="738"/>    
+    </execution>  
+  </object>  
+  <object id="64" language="java" name="persistance.MapeadorCDA" project="SGCT 1.0" 
+    file="/SGCT 1.0/src/persistance/MapeadorCDA.java" binary="false" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="37">      
+      <position height="21" width="0" x="0" y="780"/>    
+    </execution>  
+  </object>  
+  <object id="65" language="java" name="persistance.MapeadorContribuinte" project="SGCT 1.0" 
+    file="/SGCT 1.0/src/persistance/MapeadorContribuinte.java" binary="false" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="41">      
+      <position height="21" width="0" x="0" y="864"/>    
+    </execution>  
+  </object>  
+  <object id="66" language="java" name="java.io.PrintStream" project="SGCT 1.0" 
+    file="C:/Users/Tati/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_14.0.2.v20200815-0932/jre/lib/jrt-fs.jar" 
+    binary="true" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="43">      
+      <position height="21" width="0" x="0" y="944"/>    
+    </execution>  
+  </object>  
+  <object id="67" language="java" name="model.PCDA" project="SGCT 1.0" file="/SGCT 1.0/src/model/PCDA.java" 
+    binary="false" label="parcelamento" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="45">      
+      <position height="21" width="0" x="0" y="996"/>    
+    </execution>  
+  </object>  
+  <object id="68" language="java" name="javax.swing.JOptionPane" project="SGCT 1.0" 
+    file="C:/Users/Tati/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_14.0.2.v20200815-0932/jre/lib/jrt-fs.jar" 
+    binary="true" label="&lt;static&gt;" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="47">      
+      <position height="21" width="0" x="0" y="1038"/>    
+    </execution>  
+  </object>  
+  <object id="69" language="java" name="controller.ControllerPagamento" project="SGCT 1.0" 
+    file="/SGCT 1.0/src/controller/ControllerPagamento.java" binary="false" label="&lt;static&gt;" type="class" 
+    autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="49">      
+      <position height="21" width="0" x="0" y="1080"/>    
+    </execution>  
+  </object>  
+  <object id="70" language="java" name="controller.ControllerPagamento" project="SGCT 1.0" 
+    file="/SGCT 1.0/src/controller/ControllerPagamento.java" binary="false" type="class" autoSize="true">    
+    <position height="0" width="0" x="0" y="0"/>    
+    <execution id="53">      
+      <position height="21" width="0" x="0" y="1164"/>    
+    </execution>  
+  </object>  
+  <combined-fragment id="71" interaction-operator="NEG">    
+    <interaction-operand id="72" constraint="FileNotFoundException ex">      
+      <fragment refId="42"/>    
+    </interaction-operand>  
+  </combined-fragment>  
+  <message id="3" operation="confirmarParcelamento():void" asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="6" operation="getText():java.lang.String" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="7"/>  
+  </message>  
+  <message id="8" operation="getInstance():java.util.Calendar" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="9"/>  
+  </message>  
+  <message id="10" operation="setTime(java.util.Date):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="11"/>  
+  </message>  
+  <message id="12" operation="Date()" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="13"/>  
+  </message>  
+  <message id="14" operation="get(int):int" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="15"/>  
+  </message>  
+  <message id="16" operation="get(int):int" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="17"/>  
+  </message>  
+  <message id="18" operation="get(int):int" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="19"/>  
+  </message>  
+  <message id="20" operation="getInstancia():controller.ControllerPCDA" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="21"/>  
+  </message>  
+  <message id="22" operation="getText():java.lang.String" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="23"/>  
+  </message>  
+  <message id="24" operation="getInstancia():persistance.MapeadorContribuinte" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="25"/>  
+  </message>  
+  <message id="26" operation="getText():java.lang.String" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="27"/>  
+  </message>  
+  <message id="28" operation="get(java.lang.String):model.Contribuinte" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="29"/>  
+  </message>  
+  <message id="30" operation="getTime():java.util.Date" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="31"/>  
+  </message>  
+  <message id="32" 
+    operation="geraParcelamento(int,model.Contribuinte,int,int,java.util.ArrayList&lt;model.CDA&gt;,java.util.Date):model.PCDA" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="33"/>  
+  </message>  
+  <message id="34" operation="getInstancia():persistance.MapeadorCDA" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="35"/>  
+  </message>  
+  <message id="36" operation="persist():void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="37"/>  
+  </message>  
+  <message id="38" operation="getInstancia():persistance.MapeadorContribuinte" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="39"/>  
+  </message>  
+  <message id="40" operation="persist():void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="41"/>  
+  </message>  
+  <message id="42" operation="println(java.lang.String):void" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="43"/>  
+  </message>  
+  <message id="44" operation="getIdentificacao():int" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="45"/>  
+  </message>  
+  <message id="46" operation="showMessageDialog(java.awt.Component,java.lang.Object,java.lang.String,int):void" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="47"/>  
+  </message>  
+  <message id="48" operation="getInstancia():controller.ControllerPagamento" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="49"/>  
+  </message>  
+  <message id="50" operation="getTime():java.util.Date" asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="51"/>  
+  </message>  
+  <message id="52" operation="emitirBoletoPgtoParcela(java.lang.Integer,java.lang.Integer,java.util.Date):void" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="53"/>  
+  </message>
+</sequence-diagram>

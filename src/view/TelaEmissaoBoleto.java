@@ -118,90 +118,7 @@ public class TelaEmissaoBoleto extends JFrame {
 
 		btnGerarBoleto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (ControllerPagamento.getInstancia().verificaDataVencimento(dateChooserVencimento.getDate())) { // verifica a data de vencimento
-					if (rdbtnPagamentoIntegral.isSelected()) { // pgto integral
-						JOptionPane.showMessageDialog(null, "Efetuando busca...", "Aviso", JOptionPane.WARNING_MESSAGE);
-						try {
-							Contribuinte devedor = MapeadorContribuinte.getInstancia()
-									.get(textFieldIdentificacao.getText());
-							CDA divida = MapeadorCDA.getInstancia().get(Integer.parseInt(textFieldTitulo.getText()));
-							if(divida.getSituacaoCDA() == SITUACAO.EMABERTO) {
-
-							labelDocumentoValue.setText(Integer.toString(divida.getNCDA()));
-							labelValorValue.setText(Double.toString(divida.getValor()));
-							labelTitularValue.setText(devedor.getNome());
-							JOptionPane.showMessageDialog(null, "Titulo encontrado!", "Aviso",
-									JOptionPane.WARNING_MESSAGE);
-							btnSalvar.setEnabled(true);
-
-							textFieldTitulo.setEnabled(false);
-							textFieldIdentificacao.setEnabled(false);
-							dateChooserVencimento.setEnabled(false);
-							chckbxCNPJ.setEnabled(false);
-							rdbtnPagamentoIntegral.setEnabled(false);
-							rdbtnParcelamento.setEnabled(false);
-							btnGerarBoleto.setEnabled(false);
-
-							estado = 1; // pronto pra emitir boleto de pgto integral
-
-							}
-						} catch (NullPointerException k) {
-							JOptionPane.showMessageDialog(null, "Não foi possível encontrar o número do título ou o contribuinte.", "Aviso", JOptionPane.WARNING_MESSAGE);
-						}
-					}
-					if (rdbtnParcelamento.isSelected()) { // pgto parcela
-						if(ControllerPagamento.getInstancia().verificaDataVencimento(dateChooserVencimento.getDate())) {
-						JOptionPane.showMessageDialog(null, "Efetuando busca...", "Aviso", JOptionPane.WARNING_MESSAGE);
-						try {
-							Contribuinte devedor = MapeadorContribuinte.getInstancia().get(textFieldIdentificacao.getText());
-							PCDA parcelamento = MapeadorPCDA.getInstancia().get(Integer.parseInt(textFieldTitulo.getText()));
-							System.out.println(devedor.getNome());
-							System.out.println(parcelamento.getIdentificacao());
-							Parcela[] parcelas = parcelamento.getParcelas();
-
-							labelDocumentoValue.setText(Integer.toString(parcelamento.getIdentificacao()));
-							labelValorValue.setText(Double.toString(parcelamento.getParcelas()[0].getValorParcela()));
-							labelTitularValue.setText(devedor.getNome());
-							JOptionPane.showMessageDialog(null, "Titulo encontrado!", "Aviso",
-									JOptionPane.WARNING_MESSAGE);
-							btnSalvar.setEnabled(true);
-
-							textFieldTitulo.setEnabled(false);
-							textFieldIdentificacao.setEnabled(false);
-							dateChooserVencimento.setEnabled(false);
-							chckbxCNPJ.setEnabled(false);
-							rdbtnPagamentoIntegral.setEnabled(false);
-							rdbtnParcelamento.setEnabled(false);
-							btnGerarBoleto.setEnabled(false);
-							
-							String[] parcelasStr = new String[parcelas.length];
-							for (int i = 0; i < parcelasStr.length; i++){
-								parcelasStr[i] = Integer.toString(parcelas[i].getnParcela());
-							}
-							
-							DefaultComboBoxModel dml= new DefaultComboBoxModel();
-							for (int i = 0; i < parcelasStr.length; i++) {
-							  dml.addElement(parcelasStr[i]);
-							}
-
-							comboBox.setModel(dml);
-							comboBox.setEnabled(true);
-							estado = 3; // pronto pra confirmar escolha de parcela
-
-						} catch (NullPointerException k) {
-							JOptionPane.showMessageDialog(null, "Não foi possível encontrar o número do título ou o contribuinte.", "Aviso", JOptionPane.WARNING_MESSAGE);
-						}/*
-						} else {
-							JOptionPane.showMessageDialog(null, "Insira data de vencimento no mês vigente.", "Aviso", JOptionPane.WARNING_MESSAGE);
-						} */
-
-
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Favor inserir dia de vencimento no mês/ano vigentes.", "Aviso", JOptionPane.ERROR_MESSAGE);
-				}
-					}
-				}
+				gerarBoleto();
 			}
 		});
 		btnGerarBoleto.setBounds(128, 227, 108, 23);
@@ -252,37 +169,6 @@ public class TelaEmissaoBoleto extends JFrame {
 		
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(estado == 1) {// emite boleto de pagamento integral com todas as informacoes enviadas
-					Contribuinte devedor = MapeadorContribuinte.getInstancia().get(textFieldIdentificacao.getText());
-					CDA divida = MapeadorCDA.getInstancia().get(Integer.parseInt(textFieldTitulo.getText()));
-					ControllerPagamento.getInstancia().emitirBoletoPgtoIntegral(dateChooserVencimento.getDate(), divida.getNCDA(), divida.getValor(), devedor.getNome(), devedor.getIdentificacao());
-					JOptionPane.showMessageDialog(null, "Boleto gerado com sucesso e salvo localmente na pasta do aplicativo!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-				}
-				
-				else if(estado == 3) { //parcela especfica
-					Contribuinte devedor = MapeadorContribuinte.getInstancia().get(textFieldIdentificacao.getText());
-					PCDA parcelamento = MapeadorPCDA.getInstancia().get(Integer.parseInt(textFieldTitulo.getText()));
-					int integer = comboBox.getSelectedIndex();
-					ControllerPagamento.getInstancia().emitirBoletoPgtoParcela(Integer.parseInt(textFieldTitulo.getText()), integer, dateChooserVencimento.getDate());
-					JOptionPane.showMessageDialog(null, "Boleto da parcela gerado com sucesso e salvo localmente na pasta do aplicativo!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-				}
-				
-				labelDocumentoValue.setText("-"); // retorna tudo ao estado inicial
-				labelValorValue.setText("-");
-				labelTitularValue.setText("-");
-				textFieldTitulo.setText("");
-				textFieldIdentificacao.setText("");
-				dateChooserVencimento.setDate(null);
-				chckbxCNPJ.setText("");
-				textFieldTitulo.setEnabled(true);
-				textFieldIdentificacao.setEnabled(true);
-				dateChooserVencimento.setEnabled(true);
-				chckbxCNPJ.setEnabled(true);
-				rdbtnPagamentoIntegral.setEnabled(true);
-				rdbtnParcelamento.setEnabled(true);
-				btnGerarBoleto.setEnabled(true);
-				btnSalvar.setEnabled(false);
-				estado = 0;
 			}
 		});
 		btnSalvar.setEnabled(false);
@@ -324,5 +210,126 @@ public class TelaEmissaoBoleto extends JFrame {
 		JLabel lblNewLabel = new JLabel("Parcela:");
 		lblNewLabel.setBounds(10, 168, 71, 14);
 		contentPane.add(lblNewLabel);
+	}
+	
+	public void gerarBoleto() {
+		if (ControllerPagamento.getInstancia().verificaDataVencimento(dateChooserVencimento.getDate())) { // verifica a data de vencimento
+			if (rdbtnPagamentoIntegral.isSelected()) { // pgto integral
+				JOptionPane.showMessageDialog(null, "Efetuando busca...", "Aviso", JOptionPane.WARNING_MESSAGE);
+				try {
+					Contribuinte devedor = MapeadorContribuinte.getInstancia()
+							.get(textFieldIdentificacao.getText());
+					CDA divida = MapeadorCDA.getInstancia().get(Integer.parseInt(textFieldTitulo.getText()));
+					if(divida.getSituacaoCDA() == SITUACAO.EMABERTO) {
+
+					labelDocumentoValue.setText(Integer.toString(divida.getNCDA()));
+					labelValorValue.setText(Double.toString(divida.getValor()));
+					labelTitularValue.setText(devedor.getNome());
+					JOptionPane.showMessageDialog(null, "Titulo encontrado!", "Aviso",
+							JOptionPane.WARNING_MESSAGE);
+					btnSalvar.setEnabled(true);
+
+					textFieldTitulo.setEnabled(false);
+					textFieldIdentificacao.setEnabled(false);
+					dateChooserVencimento.setEnabled(false);
+					chckbxCNPJ.setEnabled(false);
+					rdbtnPagamentoIntegral.setEnabled(false);
+					rdbtnParcelamento.setEnabled(false);
+					btnGerarBoleto.setEnabled(false);
+
+					estado = 1; // pronto pra emitir boleto de pgto integral
+
+					}
+				} catch (NullPointerException k) {
+					JOptionPane.showMessageDialog(null, "Não foi possível encontrar o número do título ou o contribuinte.", "Aviso", JOptionPane.WARNING_MESSAGE);
+				}
+			}
+			if (rdbtnParcelamento.isSelected()) { // pgto parcela
+				if(ControllerPagamento.getInstancia().verificaDataVencimento(dateChooserVencimento.getDate())) {
+				JOptionPane.showMessageDialog(null, "Efetuando busca...", "Aviso", JOptionPane.WARNING_MESSAGE);
+				try {
+					Contribuinte devedor = MapeadorContribuinte.getInstancia().get(textFieldIdentificacao.getText());
+					PCDA parcelamento = MapeadorPCDA.getInstancia().get(Integer.parseInt(textFieldTitulo.getText()));
+					System.out.println(devedor.getNome());
+					System.out.println(parcelamento.getIdentificacao());
+					Parcela[] parcelas = parcelamento.getParcelas();
+
+					labelDocumentoValue.setText(Integer.toString(parcelamento.getIdentificacao()));
+					labelValorValue.setText(Double.toString(parcelamento.getParcelas()[0].getValorParcela()));
+					labelTitularValue.setText(devedor.getNome());
+					JOptionPane.showMessageDialog(null, "Titulo encontrado!", "Aviso",
+							JOptionPane.WARNING_MESSAGE);
+					btnSalvar.setEnabled(true);
+
+					textFieldTitulo.setEnabled(false);
+					textFieldIdentificacao.setEnabled(false);
+					dateChooserVencimento.setEnabled(false);
+					chckbxCNPJ.setEnabled(false);
+					rdbtnPagamentoIntegral.setEnabled(false);
+					rdbtnParcelamento.setEnabled(false);
+					btnGerarBoleto.setEnabled(false);
+					
+					String[] parcelasStr = new String[parcelas.length];
+					for (int i = 0; i < parcelasStr.length; i++){
+						parcelasStr[i] = Integer.toString(parcelas[i].getnParcela());
+					}
+					
+					DefaultComboBoxModel dml= new DefaultComboBoxModel();
+					for (int i = 0; i < parcelasStr.length; i++) {
+					  dml.addElement(parcelasStr[i]);
+					}
+
+					comboBox.setModel(dml);
+					comboBox.setEnabled(true);
+					estado = 3; // pronto pra confirmar escolha de parcela
+
+				} catch (NullPointerException k) {
+					JOptionPane.showMessageDialog(null, "Não foi possível encontrar o número do título ou o contribuinte.", "Aviso", JOptionPane.WARNING_MESSAGE);
+				}/*
+				} else {
+					JOptionPane.showMessageDialog(null, "Insira data de vencimento no mês vigente.", "Aviso", JOptionPane.WARNING_MESSAGE);
+				} */
+
+
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Favor inserir dia de vencimento no mês/ano vigentes.", "Aviso", JOptionPane.ERROR_MESSAGE);
+		}
+			}
+		}
+	}
+	
+	public void confirmarESalvar() {
+		if(estado == 1) {// emite boleto de pagamento integral com todas as informacoes enviadas
+			Contribuinte devedor = MapeadorContribuinte.getInstancia().get(textFieldIdentificacao.getText());
+			CDA divida = MapeadorCDA.getInstancia().get(Integer.parseInt(textFieldTitulo.getText()));
+			ControllerPagamento.getInstancia().emitirBoletoPgtoIntegral(dateChooserVencimento.getDate(), divida.getNCDA(), divida.getValor(), devedor.getNome(), devedor.getIdentificacao());
+			JOptionPane.showMessageDialog(null, "Boleto gerado com sucesso e salvo localmente na pasta do aplicativo!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+		else if(estado == 3) { //parcela especfica
+			Contribuinte devedor = MapeadorContribuinte.getInstancia().get(textFieldIdentificacao.getText());
+			PCDA parcelamento = MapeadorPCDA.getInstancia().get(Integer.parseInt(textFieldTitulo.getText()));
+			int integer = comboBox.getSelectedIndex();
+			ControllerPagamento.getInstancia().emitirBoletoPgtoParcela(Integer.parseInt(textFieldTitulo.getText()), integer, dateChooserVencimento.getDate());
+			JOptionPane.showMessageDialog(null, "Boleto da parcela gerado com sucesso e salvo localmente na pasta do aplicativo!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+		labelDocumentoValue.setText("-"); // retorna tudo ao estado inicial
+		labelValorValue.setText("-");
+		labelTitularValue.setText("-");
+		textFieldTitulo.setText("");
+		textFieldIdentificacao.setText("");
+		dateChooserVencimento.setDate(null);
+		chckbxCNPJ.setText("");
+		textFieldTitulo.setEnabled(true);
+		textFieldIdentificacao.setEnabled(true);
+		dateChooserVencimento.setEnabled(true);
+		chckbxCNPJ.setEnabled(true);
+		rdbtnPagamentoIntegral.setEnabled(true);
+		rdbtnParcelamento.setEnabled(true);
+		btnGerarBoleto.setEnabled(true);
+		btnSalvar.setEnabled(false);
+		estado = 0;
 	}
 }
