@@ -169,10 +169,11 @@ public class TelaEmissaoBoleto extends JFrame {
 		
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				confirmarESalvar();
 			}
 		});
 		btnSalvar.setEnabled(false);
-		btnSalvar.setBounds(298, 228, 126, 23);
+		btnSalvar.setBounds(264, 228, 160, 23);
 		contentPane.add(btnSalvar);
 		
 		JButton btnVoltar = new JButton("Voltar");
@@ -285,7 +286,10 @@ public class TelaEmissaoBoleto extends JFrame {
 
 				} catch (NullPointerException k) {
 					JOptionPane.showMessageDialog(null, "Não foi possível encontrar o número do título ou o contribuinte.", "Aviso", JOptionPane.WARNING_MESSAGE);
-				}/*
+				} catch (NumberFormatException num) {
+					JOptionPane.showMessageDialog(null, "Digite o numero do documento do contribuinte.", "Aviso", JOptionPane.WARNING_MESSAGE);
+				}
+				/*
 				} else {
 					JOptionPane.showMessageDialog(null, "Insira data de vencimento no mês vigente.", "Aviso", JOptionPane.WARNING_MESSAGE);
 				} */

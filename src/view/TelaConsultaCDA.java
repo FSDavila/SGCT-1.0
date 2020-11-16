@@ -149,12 +149,12 @@ public class TelaConsultaCDA extends JFrame {
 					} else if (nCDA.equals("") && !id.equals("")) {
 						try {
 							ArrayList<CDA> cdas = MapeadorContribuinte.getInstancia().get(id).getCDAs();
-							String[][] dados = new String[cdas.size()][3];
+							String[][] dados = new String[cdas.size()][4];
 							for (int i = 0; i < cdas.size(); i++) {
 									dados[i][0] = Integer.toString(cdas.get(i).getNCDA());
 									dados[i][1] = cdas.get(i).getTipoImposto().getTipoAsString();
 									dados[i][2] = Double.toString(cdas.get(i).getValor());
-									dados[i][3] = cdas.get(i).getSituacaoCDA().toString();
+									dados[i][3] = Integer.toString(cdas.get(i).getSituacaoCDA().getCodCDA());
 							}
 							if (cdas != null) {
 								tabelaResultados.setModel(new DefaultTableModel(dados, new String[] { "nº Titulo", "Tipo Imposto", "Valor", "Status"  }));

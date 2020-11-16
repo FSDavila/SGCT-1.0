@@ -20,6 +20,7 @@ import com.toedter.calendar.JDateChooser;
 import controller.ControllerPagamento;
 import model.PagamentoIntegral;
 import model.PagamentoParcela;
+import persistance.MapeadorPagamentoIntegral;
 
 import javax.swing.JTable;
 import javax.swing.JScrollBar;
@@ -28,6 +29,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 
@@ -65,22 +67,32 @@ public class TelaRelatorioPagamento extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaRelatorioPagamento() {
+	public TelaRelatorioPagamento() { 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 475, 406);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+				TelaMenuPrincipal.getInstancia().setVisible(true);
+			}
+		});
+		btnVoltar.setBounds(360, 11, 89, 23);
+		contentPane.add(btnVoltar);
 
-		JLabel labelRelatorioPagamento = new JLabel("Relat\u00F3rio de Pagamentos\r\n");
+		JLabel labelRelatorioPagamento = new JLabel("Relat\u00F3rio de Pagamentos Efetuados");
 		labelRelatorioPagamento.setHorizontalAlignment(SwingConstants.CENTER);
 		labelRelatorioPagamento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		labelRelatorioPagamento.setBounds(75, 26, 201, 22);
+		labelRelatorioPagamento.setBounds(67, 26, 244, 22);
 		contentPane.add(labelRelatorioPagamento);
 
-		JRadioButton rdbtnPCDA = new JRadioButton("pCDA\r\n");
-		rdbtnPCDA.setBounds(267, 68, 58, 23);
+		JRadioButton rdbtnPCDA = new JRadioButton("Parcela");
+		rdbtnPCDA.setBounds(267, 68, 99, 23);
 		contentPane.add(rdbtnPCDA);
 
 		JRadioButton rdbtnCDA = new JRadioButton("CDA\r\n");
@@ -98,7 +110,7 @@ public class TelaRelatorioPagamento extends JFrame {
 
 		JDateChooser dateFim = new JDateChooser("dd/MM/yyyy", "##/##/#####", '_');
 		dateFim.getCalendarButton().setToolTipText("Data Final\r\n");
-		dateFim.setBounds(32, 95, 110, 20);
+		dateFim.setBounds(32, 115, 110, 20);
 		contentPane.add(dateFim);
 
 		JScrollPane scrollPaneTabela = new JScrollPane();
@@ -123,11 +135,17 @@ public class TelaRelatorioPagamento extends JFrame {
 		JButton btnGerar = new JButton("Gerar Relat\u00F3rio\r\n");
 		btnGerar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				//Calendar cal = Calendar.getInstance();
+				//cal.setTime(new Date());
+				//cal.set(Calendar.MONTH, 6);
+				//PagamentoIntegral pi = ControllerPagamento.getInstancia().geraPagamentoIntegral(111314, 6565.0, cal.getTime());
+				
 				Date dataInicial = dateInicio.getDate();
 				Date dataFinal = dateFim.getDate();
 
-				ArrayList<PagamentoIntegral> pagamentosIntegral = null;
-				ArrayList<PagamentoParcela> pagamentosParcelado = null;
+				ArrayList<PagamentoIntegral> pagamentosIntegral = new ArrayList<>();
+				ArrayList<PagamentoParcela> pagamentosParcelado = new ArrayList<>();
 
 				if (dataInicial.equals(null) || dataFinal.equals(null)) {
 					JOptionPane.showMessageDialog(null, "Selecione Uma Data Inicial e uma Data Final.", "Aviso",
@@ -142,27 +160,36 @@ public class TelaRelatorioPagamento extends JFrame {
 				} else {
 					if (rdbtnCDA.isSelected()) {
 
-						for (PagamentoIntegral pagInt : ControllerPagamento.getInstancia().listPagamentoIntegral()) {
-							if (pagInt.getDataPagamento().equals(dataInicial)
-									|| pagInt.getDataPagamento().equals(dataFinal))
+						for (PagamentoIntegral pagInt : MapeadorPagamentoIntegral.getInstancia().getList()) {
+							if (pagInt.getDataPagamento().compareTo(dataInicial)
+									> pagInt.getDataPagamento().compareTo(dataFinal)) {
 								pagamentosIntegral.add(pagInt);
+							}
 
 							if (pagInt.getDataPagamento().after(dataInicial)
-									&& pagInt.getDataPagamento().before(dataFinal))
+									&& pagInt.getDataPagamento().before(dataFinal)) {
 								pagamentosIntegral.add(pagInt);
+							}
 						}
 
-						String[][] dados = new String[3][pagamentosIntegral.size()];
-						Double valorTotal = null;
+						String[][] dados = new String[pagamentosIntegral.size()][3];
+						Double valorTotal = 0.0;
+						
+						try {
+							for (PagamentoIntegral pagI : pagamentosIntegral) {
+								for (int i = 0; i < pagamentosIntegral.size(); i++) {
 
-						for (PagamentoIntegral pagI : pagamentosIntegral) {
-							for (int i = 0; i < pagamentosIntegral.size(); i++) {
-								dados[i][0] = Integer.toString(pagI.getnCDA());
-								dados[i][1] = Double.toString(pagI.getValorPgto());
-								dados[i][2] = pagI.getDataPagamento().toString();
+									dados[i][0] = Integer.toString(pagI.getnCDA());
+									dados[i][1] = Double.toString(pagI.getValorPgto());
+									dados[i][2] = pagI.getDataPagamento().toString();
+									valorTotal += pagI.getValorPgto();
 
-								valorTotal += pagI.getValorPgto();
+								}
+
 							}
+						} catch (ArrayIndexOutOfBoundsException ob) {
+							JOptionPane.showMessageDialog(null,
+									"Existe algum problema no arquivo de persistencia ou nao existem registros criados no banco de dados ate o momento.");
 						}
 
 						if (pagamentosIntegral != null) {
@@ -182,14 +209,18 @@ public class TelaRelatorioPagamento extends JFrame {
 								pagamentosParcelado.add(pagP);
 						}
 
-						String dados[][] = new String[4][pagamentosParcelado.size()];
+						String dados[][] = new String[pagamentosParcelado.size()][4];
 
 						for (PagamentoParcela pagP : pagamentosParcelado) {
 							for (int i = 0; i < pagamentosParcelado.size(); i++) {
+								try {
 								dados[i][0] = Integer.toString(pagP.getIdentificacaoPCDA());
 								dados[i][1] = Integer.toString(pagP.getnParcela());
 								dados[i][2] = Double.toString(pagP.getValorParcela());
 								dados[i][3] = pagP.getDataPagamento().toString();
+								} catch (ArrayIndexOutOfBoundsException ob) {
+									JOptionPane.showMessageDialog(null, "Existe algum problema no arquivo de persistencia ou nao existem registros criados no banco de dados ate o momento.");
+								}
 							}
 						}
 
@@ -206,7 +237,15 @@ public class TelaRelatorioPagamento extends JFrame {
 
 			}
 		});
-		btnGerar.setBounds(182, 98, 143, 23);
+		btnGerar.setBounds(182, 98, 160, 23);
 		contentPane.add(btnGerar);
+		
+		JLabel lblNewLabel = new JLabel("Data Final");
+		lblNewLabel.setBounds(29, 102, 77, 14);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblDataInicial = new JLabel("Data Inicial");
+		lblDataInicial.setBounds(29, 59, 77, 14);
+		contentPane.add(lblDataInicial);
 	}
 }
