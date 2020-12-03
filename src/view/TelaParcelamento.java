@@ -216,7 +216,7 @@ public class TelaParcelamento extends JFrame {
 		contentPane.add(btnSimularParcelamento);
 		btnConfirmarParcelamento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) { //confirmar parcelamento
-				
+				confirmarParcelamento();
 			}
 		});
 		

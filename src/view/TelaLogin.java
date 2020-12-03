@@ -23,6 +23,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Label;
 
 public class TelaLogin extends JFrame {
 
@@ -116,6 +117,9 @@ public class TelaLogin extends JFrame {
 		JLabel lblNewLabel_2 = new JLabel("Login:");
 		lblNewLabel_2.setBounds(44, 72, 46, 14);
 		contentPane.add(lblNewLabel_2);
+		
+		Label labelSenha = new Label("Senha:");
+		labelSenha.setBounds(42, 119, 62, 22);
+		contentPane.add(labelSenha);
 	}
-
 }

@@ -214,6 +214,7 @@ public class TelaEmissaoBoleto extends JFrame {
 	}
 	
 	public void gerarBoleto() {
+		
 		if (ControllerPagamento.getInstancia().verificaDataVencimento(dateChooserVencimento.getDate())) { // verifica a data de vencimento
 			if (rdbtnPagamentoIntegral.isSelected()) { // pgto integral
 				JOptionPane.showMessageDialog(null, "Efetuando busca...", "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -301,6 +302,8 @@ public class TelaEmissaoBoleto extends JFrame {
 		}
 			}
 		}
+		
+		
 	}
 	
 	public void confirmarESalvar() {
