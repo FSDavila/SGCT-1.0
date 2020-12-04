@@ -79,6 +79,7 @@ public class TelaLogin extends JFrame {
 				Funcionario fprocurado = ControllerFuncionario.getInstancia().getFuncionarioByLogin(textField.getText());
 				if(fprocurado != null && cprocurado == null) {
 					JOptionPane.showMessageDialog(null, "Funcionario logado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+					TelaChatFuncionario.getInstancia().setFuncionariofuncionarioAtendente(fprocurado); //funcionario setado na janela de atendimento do chat para caso ele va atender
 					TelaMenuPrincipal.getInstancia().setVisible(true);
 					setVisible(false);
 				}

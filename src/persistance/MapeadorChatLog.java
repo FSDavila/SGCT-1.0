@@ -95,4 +95,11 @@ public class MapeadorChatLog {
 
     }
     
+    public ArrayList<Vector<Vector>> getList() {
+        return new ArrayList(cacheChatLogs.values());
+    }
+    
+    public ArrayList<String> getKeys() {
+        return new ArrayList<String>(cacheChatLogs.keySet());
+    }
 }
