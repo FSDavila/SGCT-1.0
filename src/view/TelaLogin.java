@@ -11,7 +11,6 @@ import controller.ControllerContribuinte;
 import controller.ControllerFuncionario;
 import model.Contribuinte;
 import model.Funcionario;
-import persistance.MapeadorChatLog;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -24,6 +23,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Label;
 
 public class TelaLogin extends JFrame {
 
@@ -86,13 +86,6 @@ public class TelaLogin extends JFrame {
 				else if(cprocurado != null && fprocurado == null) {
 					//entrar no chat
 					JOptionPane.showMessageDialog(null, "Contribuinte logado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-					TelaChatContribuinte.getInstancia().setUsuarioLogado(cprocurado);//loga usuario no chat
-					if(MapeadorChatLog.getInstancia().get(cprocurado.getIdentificacao()) != null) {
-						TelaChatContribuinte.getInstancia().setDadosChat(cprocurado.getIdentificacao()); //carrega o historico do chat do usuario onde parou
-					}
-					TelaChatContribuinte.getInstancia().setUsuarioOnline();
-					TelaChatContribuinte.getInstancia().setVisible(true);
-					setVisible(false);
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Verifique os dados digitados e tente novamente.", "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -126,9 +119,8 @@ public class TelaLogin extends JFrame {
 		lblNewLabel_2.setBounds(44, 72, 46, 14);
 		contentPane.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_4 = new JLabel("Senha:");
-		lblNewLabel_4.setBounds(44, 133, 46, 14);
-		contentPane.add(lblNewLabel_4);
+		Label labelSenha = new Label("Senha:");
+		labelSenha.setBounds(42, 119, 62, 22);
+		contentPane.add(labelSenha);
 	}
-
 }
