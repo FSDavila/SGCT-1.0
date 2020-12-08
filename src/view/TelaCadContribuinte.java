@@ -36,8 +36,6 @@ public class TelaCadContribuinte extends JFrame {
 	private JTextField textFieldIdentificacao;
 	private JTextField textFieldNome;
 	private JTextField textFieldEmail;
-	private JTextField textFieldLogin;
-	private JTextField textFieldSenha;
 	private JCheckBox checkBoxEhCNPJ;
 	private JDateChooser dateChooserDNF;
 	private JButton btnConfirmar;
@@ -128,14 +126,13 @@ public class TelaCadContribuinte extends JFrame {
 					try {
 						String identificacao = textFieldIdentificacao.getText();
 						String nome = textFieldNome.getText();
-						String login = textFieldLogin.getText();
-						String senha = textFieldSenha.getText();
+					
 						String email = textFieldEmail.getText();
 						boolean ehCNPJ = checkBoxEhCNPJ.isSelected();
 						Date DNF = dateChooserDNF.getDate();
 
 						Contribuinte novo = ControllerContribuinte.getInstancia().cadastraContribuinte(nome, DNF,
-								identificacao, login, senha, email, ehCNPJ);
+								identificacao, null, null, email, ehCNPJ);
 
 						if (novo != null) {
 							try {
@@ -145,15 +142,13 @@ public class TelaCadContribuinte extends JFrame {
 								textFieldIdentificacao.setEnabled(false);
 								textFieldNome.setEnabled(false);
 								textFieldEmail.setEnabled(false);
-								textFieldLogin.setEnabled(false);
-								textFieldSenha.setEnabled(false);
+								
 								checkBoxEhCNPJ.setEnabled(false);
 								dateChooserDNF.setEnabled(false);
 								textFieldIdentificacao.setText("");
 								textFieldNome.setText("");
 								textFieldEmail.setText("");
-								textFieldLogin.setText("");
-								textFieldSenha.setText("");
+								
 								dateChooserDNF.setDate(null);
 								checkBoxEhCNPJ.setSelected(false);
 								btnConfirmar.setEnabled(false);
@@ -181,8 +176,7 @@ public class TelaCadContribuinte extends JFrame {
 						Contribuinte alterar = MapeadorContribuinte.getInstancia().get(textFieldIdentificacao.getText());
 						
 						alterar.setNome(textFieldNome.getText());
-						alterar.setLogin(textFieldLogin.getText());
-						alterar.setSenha(textFieldSenha.getText());
+						
 						alterar.setEmail(textFieldEmail.getText());
 						if(checkBoxEhCNPJ.isSelected()) {
 							alterar.setEhCNPJ(true);
@@ -213,15 +207,13 @@ public class TelaCadContribuinte extends JFrame {
 					textFieldIdentificacao.setEnabled(false);
 					textFieldNome.setEnabled(false);
 					textFieldEmail.setEnabled(false);
-					textFieldLogin.setEnabled(false);
-					textFieldSenha.setEnabled(false);
+					
 					checkBoxEhCNPJ.setEnabled(false);
 					dateChooserDNF.setEnabled(false);
 					textFieldIdentificacao.setText("");
 					textFieldNome.setText("");
 					textFieldEmail.setText("");
-					textFieldLogin.setText("");
-					textFieldSenha.setText("");
+					
 					dateChooserDNF.setDate(null);
 					checkBoxEhCNPJ.setSelected(false);
 					
@@ -247,26 +239,6 @@ public class TelaCadContribuinte extends JFrame {
 		lblNewLabel_1.setBounds(10, 126, 148, 14);
 		panel.add(lblNewLabel_1);
 
-		textFieldLogin = new JTextField();
-		textFieldLogin.setEnabled(false);
-		textFieldLogin.setColumns(10);
-		textFieldLogin.setBounds(299, 107, 86, 20);
-		panel.add(textFieldLogin);
-
-		JLabel lblLogin = new JLabel("Login");
-		lblLogin.setBounds(299, 89, 86, 14);
-		panel.add(lblLogin);
-
-		textFieldSenha = new JTextField();
-		textFieldSenha.setEnabled(false);
-		textFieldSenha.setColumns(10);
-		textFieldSenha.setBounds(299, 156, 86, 20);
-		panel.add(textFieldSenha);
-
-		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setBounds(299, 138, 86, 14);
-		panel.add(lblSenha);
-
 		checkBoxEhCNPJ = new JCheckBox("Cliente Pessoa Jur\u00EDdica");
 		checkBoxEhCNPJ.setEnabled(false);
 		checkBoxEhCNPJ.setBounds(6, 56, 245, 23);
@@ -278,8 +250,7 @@ public class TelaCadContribuinte extends JFrame {
 				textFieldIdentificacao.setEnabled(true);
 				textFieldNome.setEnabled(true);
 				textFieldEmail.setEnabled(true);
-				textFieldLogin.setEnabled(true);
-				textFieldSenha.setEnabled(true);
+				
 				checkBoxEhCNPJ.setEnabled(true);
 				dateChooserDNF.setEnabled(true);
 				btnConfirmar.setEnabled(true);
@@ -300,15 +271,13 @@ public class TelaCadContribuinte extends JFrame {
 				textFieldIdentificacao.setEnabled(false);
 				textFieldNome.setEnabled(false);
 				textFieldEmail.setEnabled(false);
-				textFieldLogin.setEnabled(false);
-				textFieldSenha.setEnabled(false);
+				
 				checkBoxEhCNPJ.setEnabled(false);
 				dateChooserDNF.setEnabled(false);
 				textFieldIdentificacao.setText("");
 				textFieldNome.setText("");
 				textFieldEmail.setText("");
-				textFieldLogin.setText("");
-				textFieldSenha.setText("");
+				
 				dateChooserDNF.setDate(null);
 				checkBoxEhCNPJ.setSelected(false);
 				btnConfirmar.setEnabled(false);
@@ -341,8 +310,7 @@ public class TelaCadContribuinte extends JFrame {
 					textFieldIdentificacao.setText(consultar.getIdentificacao());
 					textFieldNome.setText(consultar.getNome());
 					textFieldEmail.setText(consultar.getEmail());
-					textFieldLogin.setText(consultar.getLogin());
-					textFieldSenha.setText(consultar.getSenha());
+					
 					dateChooserDNF.setDate(consultar.getDtCadastroChat());
 					btnConfirmar.setEnabled(false);
 					btnCancelar.setEnabled(true);
@@ -369,13 +337,11 @@ public class TelaCadContribuinte extends JFrame {
 					textFieldIdentificacao.setText(consultar.getIdentificacao());
 					textFieldNome.setText(consultar.getNome());
 					textFieldEmail.setText(consultar.getEmail());
-					textFieldLogin.setText(consultar.getLogin());
-					textFieldSenha.setText(consultar.getSenha());
+					
 					dateChooserDNF.setDate(consultar.getDtCadastroChat());
 					textFieldNome.setEnabled(true);
 					textFieldEmail.setEnabled(true);
-					textFieldLogin.setEnabled(true);
-					textFieldSenha.setEnabled(true);
+					
 					dateChooserDNF.setEnabled(true);
 					btnConfirmar.setEnabled(true);
 					btnCancelar.setEnabled(true);

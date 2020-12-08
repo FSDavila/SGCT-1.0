@@ -16,12 +16,15 @@ import com.toedter.calendar.JDateChooser;
 
 import controller.ControllerContribuinte;
 import model.Contribuinte;
+import persistance.MapeadorCDA;
+import persistance.MapeadorContribuinte;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.awt.event.ActionEvent;
 
 public class TelaCadChatContribuinte extends JFrame {
@@ -70,38 +73,38 @@ public class TelaCadChatContribuinte extends JFrame {
 		contentPane.setLayout(null);
 
 		textFieldLogin = new JTextField();
-		textFieldLogin.setBounds(151, 104, 153, 20);
+		textFieldLogin.setBounds(147, 104, 153, 20);
 		contentPane.add(textFieldLogin);
 		textFieldLogin.setColumns(10);
 
 		textFieldSenha = new JPasswordField();
-		textFieldSenha.setBounds(151, 132, 153, 20);
+		textFieldSenha.setBounds(147, 132, 153, 20);
 		contentPane.add(textFieldSenha);
 		textFieldSenha.setColumns(10);
 
 		JLabel lblLogin = new JLabel("Login:");
-		lblLogin.setBounds(76, 107, 46, 14);
+		lblLogin.setBounds(58, 107, 46, 14);
 		contentPane.add(lblLogin);
 
 		JLabel lblNewLabel = new JLabel("Senha:\r\n\r\n");
-		lblNewLabel.setBounds(76, 135, 46, 14);
+		lblNewLabel.setBounds(58, 135, 46, 14);
 		contentPane.add(lblNewLabel);
 
 		textFieldCPF = new JTextField();
 
-		textFieldCPF.setBounds(152, 79, 102, 20);
+		textFieldCPF.setBounds(147, 79, 102, 20);
 		contentPane.add(textFieldCPF);
 		textFieldCPF.setColumns(10);
 
 		JLabel lblNewLabel_1 = new JLabel("CPF/CNPJ:\r\n\r\n");
-		lblNewLabel_1.setBounds(76, 82, 66, 14);
+		lblNewLabel_1.setBounds(58, 82, 66, 14);
 		contentPane.add(lblNewLabel_1);
 
 		JButton btnCadastrar = new JButton("Cadastrar\r\n");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Contribuinte contribuinte = null;
-				
+
 				if (textFieldCPF.getText().trim().equals("")) {
 					JOptionPane.showMessageDialog(null, "Favor inserir um CPF válido.", "Aviso",
 							JOptionPane.WARNING_MESSAGE);
@@ -110,36 +113,43 @@ public class TelaCadChatContribuinte extends JFrame {
 							JOptionPane.WARNING_MESSAGE);
 				} else {
 					String cpf = textFieldCPF.getText();
-				    contribuinte = ControllerContribuinte.getInstancia().getContribuinteById(cpf);
-					
+					contribuinte = ControllerContribuinte.getInstancia().getContribuinteById(cpf);
+
 				}
-				
+
 				if (contribuinte != null) {
 					ControllerContribuinte.getInstancia().alteraDados(contribuinte.getIdentificacao(),
 							contribuinte.getNome(), contribuinte.getDNF(), textFieldLogin.getText(),
 							textFieldSenha.getText(), contribuinte.getEmail(), new Date(System.currentTimeMillis()),
 							contribuinte.isEhCNPJ());
-					
+
 					JOptionPane.showMessageDialog(null, "Usuario cadastrado com sucesso!", "Aviso",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
+
+				try {
+					MapeadorContribuinte.getInstancia().persist();
+				} catch (FileNotFoundException ex) {
+					System.out.println("Favor verificar o arquivo de serializacao.");
+				}
+
 			}
 		});
 		btnCadastrar.setBounds(208, 182, 95, 23);
 		contentPane.add(btnCadastrar);
-		
+
 		btnNewButton = new JButton("Voltar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
-				TelaMenuPrincipal.getInstancia().setVisible(true);
+				TelaLogin.getInstancia().setVisible(true);
 			}
 		});
 		btnNewButton.setBounds(76, 182, 89, 23);
 		contentPane.add(btnNewButton);
-		
-		lblNewLabel_2 = new JLabel("Cadastrando contribuinte para o CHAT\r\n");
-		lblNewLabel_2.setBounds(96, 35, 208, 14);
+
+		lblNewLabel_2 = new JLabel("Cadastro para o CHAT\r\n");
+		lblNewLabel_2.setBounds(112, 34, 142, 14);
 		contentPane.add(lblNewLabel_2);
 	}
 }
