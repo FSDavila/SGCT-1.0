@@ -36,11 +36,11 @@ public class ControllerFuncionario {
 	}
 
 	public boolean validaCpf(String cpf) {
-		//if (getFuncionarioByCpf(cpf) != null) {
-		//	return false;
-		//} else {
+		if (getFuncionarioByCpf(cpf) != null) {
+			return false;
+		} else {
 			return true;
-		
+		}
 	}
 
 	public boolean validaCamposNull(String nome, String cpf, String email, String login, String senha) {
