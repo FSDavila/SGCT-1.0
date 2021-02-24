@@ -1,5 +1,9 @@
 # SGCT-1.0
- 
+
+Lembrando que este sistema foi feito para a Disciplina de Análise e Projeto de Sistemas, cuja eu concluí em 2019.
+
+Att Filipe.
+
 #O Sistema de Gestão e Cobrança (SGCT) é uma aplicação de console que servirá como meio de atender a crescente demanda por comunicatividade e por resolução de problemas dos contribuintes quanto a acessibilidade aos serviços do Estado para pagamento de dívidas ativas estaduais (CDA - Certidão de Dívida Ativa).
 
 
