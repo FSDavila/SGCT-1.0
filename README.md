@@ -1,6 +1,6 @@
 # SGCT-1.0
 
-Lembrando que este sistema foi feito para a Disciplina de Análise e Projeto de Sistemas, cuja eu concluí em 2020.
+Lembrando que este sistema foi feito para a Disciplina de Análise e Projeto de Sistemas (Sistemas de Informação), cuja eu concluí em 2020 (4ª fase).
 
 Att Filipe.
 
