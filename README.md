@@ -1,13 +1,10 @@
 # SGCT-1.0
 
-Lembrando que este sistema foi feito para a Disciplina de Análise e Projeto de Sistemas (Sistemas de Informação), cuja eu concluí em 2020 (4ª fase).
+This system was created for the Discipline of Systems Analysis and Design (Information Systems - Federal University of Santa Catarina), which I completed in 2020 (4th semester).
 
-Att Filipe.
+#The Management and Collection System (SGCT) is a console application designed to meet the growing demand for communication and problem resolution for taxpayers regarding accessibility to state services for the payment of state debts (CDA - Certificate of Outstanding Debt). The application offers a debt installment functionality, also generating bank slips for the payment of the installments.
 
-#O Sistema de Gestão e Cobrança (SGCT) é uma aplicação de console que servirá como meio de atender a crescente demanda por comunicatividade e por resolução de problemas dos contribuintes quanto a acessibilidade aos serviços do Estado para pagamento de dívidas ativas estaduais (CDA - Certidão de Dívida Ativa).
-
-
-#Para logar no sistema como Funcionário, basta utilizar o login: joao.dutra / senha: joaodutra.
-#Para logar como Funcionário com permissões de Administrador, use - login: admin / senha: admin
-#Para logar como contribuinte ou fazer buscas pelo CPF, você pode utilizar algum dos CPFs disponíveis na database a priori (o da Valeria é 03103103131, o do Antonio 04104104141, ambos tem várias CDAs de diferentes tipos registrados).
+#To log into the system as an Employee of the State, use the login: joao.dutra / password: joaodutra.
+#To log in as an State Administrator permissions, use - login: admin / password: admin.
+#To log in as a taxpayer or search by CPF (Brazilian Social Security Number), you can use any of the available CPFs in the database (Valeria’s is 03103103131, Antonio’s is 04104104141; both have several CDAs of different types registered).
 #
